@@ -1,0 +1,577 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D4CAB7C4-2204-412C-AE8B-A639C9ABF4F1}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FileArchiver.Presentation</RootNamespace>
+    <AssemblyName>FileArchiver</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Binaries\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>True</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>True</CodeContractsInferEnsures>
+    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
+    <CodeContractsInferObjectInvariants>True</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>True</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>True</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
+    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
+    <CodeContractsSuggestObjectInvariants>True</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>False</CodeContractsCacheAnalysisResults>
+    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>3</CodeContractsAnalysisWarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Binaries\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>False</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestRequires>False</CodeContractsSuggestRequires>
+    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Preconditions</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>..\..\Resources\Icons\App.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Documentation|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>..\..\Binaries\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <DocumentationFile>..\..\Binaries\Debug\FileArchiver.XML</DocumentationFile>
+    <NoWarn>
+    </NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <CodeContractsEnableRuntimeChecking>False</CodeContractsEnableRuntimeChecking>
+    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
+    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
+    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
+    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
+    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
+    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
+    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
+    <CodeContractsArithmeticObligations>True</CodeContractsArithmeticObligations>
+    <CodeContractsEnumObligations>True</CodeContractsEnumObligations>
+    <CodeContractsRedundantAssumptions>True</CodeContractsRedundantAssumptions>
+    <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
+    <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
+    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
+    <CodeContractsMissingPublicEnsuresAsWarnings>False</CodeContractsMissingPublicEnsuresAsWarnings>
+    <CodeContractsInferRequires>True</CodeContractsInferRequires>
+    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
+    <CodeContractsInferEnsuresAutoProperties>True</CodeContractsInferEnsuresAutoProperties>
+    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
+    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
+    <CodeContractsSuggestAssumptionsForCallees>False</CodeContractsSuggestAssumptionsForCallees>
+    <CodeContractsSuggestRequires>False</CodeContractsSuggestRequires>
+    <CodeContractsNecessaryEnsures>True</CodeContractsNecessaryEnsures>
+    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
+    <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
+    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
+    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
+    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
+    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsCustomRewriterAssembly />
+    <CodeContractsCustomRewriterClass />
+    <CodeContractsLibPaths />
+    <CodeContractsExtraRewriteOptions />
+    <CodeContractsExtraAnalysisOptions />
+    <CodeContractsSQLServerOption />
+    <CodeContractsBaseLineFile />
+    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
+    <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
+    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
+    <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
+    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.Composition.Registration" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Abstractions, Version=2.0.0.113, Culture=neutral, PublicKeyToken=d480b5b72fb413da, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\System.IO.Abstractions.2.0.0.113\lib\net40\System.IO.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection.Context" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Settings\ApplicationSettings.cs" />
+    <Compile Include="ArchiveSettings\IArchiveSettingsViewModel.Contracts.cs">
+      <DependentUpon>IArchiveSettingsViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArchiveSettings\IArchiveSettingsViewModelFactory.Contracts.cs">
+      <DependentUpon>IArchiveSettingsViewModelFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArchiveSettings\Framework\ISettingsControl.Contracts.cs">
+      <DependentUpon>ISettingsControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArchiveSettings\Framework\ISettingsControlsFactory.Contracts.cs">
+      <DependentUpon>ISettingsControlsFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArchiveSettings\Framework\ISettingsControlsFactory.Extensions.cs" />
+    <Compile Include="ArchiveSettings\Framework\ISettingsControlWithTitle.Contracts.cs">
+      <DependentUpon>ISettingsControlWithTitle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArchiveSettings\Framework\Utils\SettingsControlBase.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\Controls\ChoiceBox.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\ControlBindingCollection.Extensions.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\Controls\DestinationPathBrowser.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\Controls\GroupBox.cs" />
+    <Compile Include="ArchiveSettings\Framework\ISettingsControl.cs" />
+    <Compile Include="ArchiveSettings\Framework\ISettingsControlsFactory.cs" />
+    <Compile Include="ArchiveSettings\Framework\ISettingsControlWithTitle.cs" />
+    <Compile Include="ArchiveSettings\Framework\Utils\MultipleChoicesEnablementManager.cs" />
+    <Compile Include="ArchiveSettings\Framework\Utils\MultipleChoicesVisibilityManager.cs" />
+    <Compile Include="CommandLine\GUICommandLineHandler.Contracts.cs">
+      <DependentUpon>GUICommandLineHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommandLine\Presenters\IEntireArchivesExtractionView.Contracts.cs">
+      <DependentUpon>IEntireArchivesExtractionView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommandLine\Presenters\IPackIntoArchiveView.Contracts.cs">
+      <DependentUpon>IPackIntoArchiveView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileListView\FileIconProvider\IFileIconProvider.Contracts.cs">
+      <DependentUpon>IFileIconProvider.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileListView\IFileListView.Contracts.cs">
+      <DependentUpon>IFileListView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileListView\IFileListViewModel.Contracts.cs">
+      <DependentUpon>IFileListViewModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileListView\Windows.Forms\FileListPanel.DataBinding.cs">
+      <SubType>UserControl</SubType>
+      <DependentUpon>FileListPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileListView\IFileListViewModel.cs" />
+    <Compile Include="OtherViews\IDialogLauncher.Contracts.cs">
+      <DependentUpon>IDialogLauncher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Progress\IProgressView.Contracts.cs">
+      <DependentUpon>IProgressView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Progress\IProgressViewFactory.Contracts.cs">
+      <DependentUpon>IProgressViewFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PerFileErrorHandlers\ArchivePerFileExceptionHandlerBase.Contracts.cs">
+      <DependentUpon>ArchivePerFileExceptionHandlerBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PerFileErrorHandlers\IExtractionPerFileErrorPresenterFactory.Contracts.cs">
+      <DependentUpon>IExtractionPerFileErrorPresenterFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PerFileErrorHandlers\IFileAddingPerFileErrorPresenterFactory.Contracts.cs">
+      <DependentUpon>IFileAddingPerFileErrorPresenterFactory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\AggregateTypeConverter.cs" />
+    <Compile Include="Utils\NoConversionPossibleException.cs" />
+    <Compile Include="Utils\NotifyPropertyChangedHelper.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\ArchiveSettingsPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\ArchiveSettingsPanel.Designer.cs">
+      <DependentUpon>ArchiveSettingsPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\MappingTypeConverter.cs" />
+    <Compile Include="ArchiveSettings\IArchiveSettingsViewModel.cs" />
+    <Compile Include="ArchiveSettings\IArchiveSettingsViewModelFactory.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\Controls\PathBrowser.cs" />
+    <Compile Include="ArchiveSettings\Framework\Utils\EnumerablePropertyBindingWrapper.cs" />
+    <Compile Include="ArchiveSettings\Framework\Utils\PropertyReference.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\SettingsControlFactory.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\Controls\SourcePathBrowser.cs" />
+    <Compile Include="ArchiveSettings\Framework\Windows.Forms\Controls\TextField.cs" />
+    <Compile Include="CommandLine\ICommandLineHandler.Contracts.cs">
+      <DependentUpon>ICommandLineHandler.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArchiveSettings\INewArchiveSettingsScreen.cs" />
+    <Compile Include="ArchiveSettings\NewArchiveSettings.cs" />
+    <Compile Include="ArchiveSettings\NewArchiveViewModel.cs" />
+    <Compile Include="ArchiveSettings\NewArchiveFormFactory.cs" />
+    <Compile Include="ArchiveSettings\Framework\Utils\MutablePropertyReference.cs" />
+    <Compile Include="ApplicationBootstraper.cs" />
+    <Compile Include="CommandLine\Handlers\ExtractSwitchHandler.cs" />
+    <Compile Include="CommandLine\GUICommandLineHandler.cs" />
+    <Compile Include="CommandLine\ICommandLineHandler.cs" />
+    <Compile Include="CommandLine\Handlers\PackSwitchHandler.cs" />
+    <Compile Include="Commands\CreateDirectoryCommand.cs" />
+    <Compile Include="Commands\AddFilesCommand.cs" />
+    <Compile Include="Commands\OpenArchiveCommand.cs" />
+    <Compile Include="Commands\RenameFileCommand.cs" />
+    <Compile Include="Commands\ExtractFilesCommand.cs" />
+    <Compile Include="Commands\OpenFilesCommand.cs" />
+    <Compile Include="Commands\RemoveFilesCommand.cs" />
+    <Compile Include="Commands\SaveArchiveCommand.cs" />
+    <Compile Include="Commands\NewArchiveCommand.cs" />
+    <Compile Include="Commands\CommandSystem\Windows.Forms\CommandMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\CommandSystem\CommandBase.cs" />
+    <Compile Include="Commands\CommandSystem\Windows.Forms\CommandToolStripButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\CommandSystem\Windows.Forms\CommandToolStripMenuItem.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\SetLanguageCommand.cs" />
+    <Compile Include="DependencyInjectionContainer.cs" />
+    <Compile Include="OtherViews\DialogLauncher.cs" />
+    <Compile Include="FileListView\EventArgs\FileOpenRequestEventArgs.cs" />
+    <Compile Include="FileListView\Windows.Forms\FileListPanel.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FileListView\Windows.Forms\FileListPanel.designer.cs">
+      <DependentUpon>FileListPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileListView\FileListPresenter.cs" />
+    <Compile Include="FileListView\Windows.Forms\FileListRegion.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="FileListView\FileListViewModel.cs" />
+    <Compile Include="FileListView\IFileListView.cs" />
+    <Compile Include="Shell\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shell\MainForm.designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\CommandSystem\NullCommand.cs" />
+    <Compile Include="Commands\CommandSystem\ICommand.cs" />
+    <Compile Include="OtherViews\IDialogLauncher.cs" />
+    <Compile Include="PerFileErrorHandlers\ExtractionPerFileErrorPresenter.cs" />
+    <Compile Include="PerFileErrorHandlers\ExtractionPerFileErrorPresenterFactory.cs" />
+    <Compile Include="PerFileErrorHandlers\FileAddingPerFileErrorPresenter.cs" />
+    <Compile Include="PerFileErrorHandlers\FileAddingPerFileErrorPresenterFactory.cs" />
+    <Compile Include="PerFileErrorHandlers\ArchivePerFileExceptionHandlerBase.cs" />
+    <Compile Include="CommandLine\Presenters\EntireArchivesExtractionPresenter.cs" />
+    <Compile Include="PerFileErrorHandlers\IExtractionPerFileErrorPresenterFactory.cs" />
+    <Compile Include="PerFileErrorHandlers\IFileAddingPerFileErrorPresenterFactory.cs" />
+    <Compile Include="Utils\TypeConverterUtil.cs" />
+    <Compile Include="Utils\Windows.Forms\Control.Extensions.cs" />
+    <Compile Include="Utils\IEnumerable.Extensions.cs" />
+    <Compile Include="Utils\INotifyPropertyChanged.Extensions.cs" />
+    <Compile Include="Utils\Windows.Forms\Region.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Utils\SynchronizationContext.Extensions.cs" />
+    <Compile Include="CommandLine\Presenters\StandaloneOperationsView.cs" />
+    <Compile Include="CommandLine\Presenters\IEntireArchivesExtractionView.cs" />
+    <Compile Include="CommandLine\Presenters\IPackIntoArchiveView.cs" />
+    <Compile Include="PerFileErrorHandlers\Views\IPerFileErrorView.cs" />
+    <Compile Include="Progress\IProgressViewFactory.cs" />
+    <Compile Include="CommandLine\Presenters\PackIntoArchivePresenter.cs" />
+    <Compile Include="PerFileErrorHandlers\Views\PerFileErrorDialogLauncher.cs" />
+    <Compile Include="Utils\ArchiveFileFilterBuilder.cs" />
+    <Compile Include="FileListView\FileIconProvider\GenericFileIconProvider.cs" />
+    <Compile Include="FileListView\EventArgs\FileNameAcceptedEventArgs.cs" />
+    <Compile Include="FileListView\Windows.Forms\FileGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Progress\IProgressView.cs" />
+    <Compile Include="Progress\ProgressFormFactory.cs" />
+    <Compile Include="Utils\CancelOrContinue.cs" />
+    <Compile Include="FileListView\FileEntryBindingList.cs" />
+    <Compile Include="FileListView\FileIconProvider\IFileIconProvider.cs" />
+    <Compile Include="FileListView\EventArgs\FileNameValidatingEventArgs.cs" />
+    <Compile Include="FileListView\Utils\UserFriendlySizeFormatter.cs" />
+    <Compile Include="OtherViews\AboutForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OtherViews\AboutForm.designer.cs">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FileListView\FileEntryViewModel.cs" />
+    <Compile Include="FileListView\Windows.Forms\DataGridViewFileNameCell.cs" />
+    <Compile Include="PerFileErrorHandlers\Views\FileExistsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PerFileErrorHandlers\Views\FileExistsForm.Designer.cs">
+      <DependentUpon>FileExistsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ArchiveSettings\NewArchiveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ArchiveSettings\NewArchiveForm.Designer.cs">
+      <DependentUpon>NewArchiveForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Progress\ProgressForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Progress\ProgressForm.Designer.cs">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shell\IMainView.cs" />
+    <Compile Include="Shell\MainPresenter.cs" />
+    <Compile Include="Utils\Windows.Forms\TextBox.Extensions.cs" />
+    <Compile Include="Settings\WindowLayoutSettings.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ArchiveSettings\Framework\Windows.Forms\ArchiveSettingsPanel.resx">
+      <DependentUpon>ArchiveSettingsPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileListView\Windows.Forms\FileListPanel.pl-PL.resx">
+      <DependentUpon>FileListPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileListView\Windows.Forms\FileListPanel.resx">
+      <DependentUpon>FileListPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shell\MainForm.pl-PL.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shell\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherViews\AboutForm.pl-PL.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OtherViews\AboutForm.resx">
+      <DependentUpon>AboutForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PerFileErrorHandlers\Views\FileExistsForm.pl-PL.resx">
+      <DependentUpon>FileExistsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PerFileErrorHandlers\Views\FileExistsForm.resx">
+      <DependentUpon>FileExistsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="FileListView\FileIconProvider\WindowsFileIconProvider.cs" />
+    <EmbeddedResource Include="ArchiveSettings\NewArchiveForm.pl-PL.resx">
+      <DependentUpon>NewArchiveForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Progress\ProgressForm.pl-PL.resx">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ArchiveSettings\NewArchiveForm.resx">
+      <DependentUpon>NewArchiveForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Progress\ProgressForm.resx">
+      <DependentUpon>ProgressForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.pl-PL.resx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="..\..\FileArchiver.licenseheader">
+      <Link>FileArchiver.licenseheader</Link>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\FileArchiver.Presentation.FileEntryDTO.datasource" />
+    <None Include="Properties\DataSources\FileArchiver.Presentation.FileListView.FileListViewModel.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\..\Resources\Icons\Add.png">
+      <Link>Icons\Add.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\App.ico">
+      <Link>Icons\App.ico</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\Extract.png">
+      <Link>Icons\Extract.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\File.png">
+      <Link>Icons\File.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\Folder.png">
+      <Link>Icons\Folder.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\MoveUp.png">
+      <Link>Icons\MoveUp.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\New.png">
+      <Link>Icons\New.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\Open.png">
+      <Link>Icons\Open.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\Remove.png">
+      <Link>Icons\Remove.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\Save.png">
+      <Link>Icons\Save.png</Link>
+    </Content>
+    <Content Include="..\..\Resources\Icons\Search.png">
+      <Link>Icons\Search.png</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FileArchiver.Core\FileArchiver.Core.csproj">
+      <Project>{716f5160-09b4-49ff-8f02-6e7bb23767b7}</Project>
+      <Name>FileArchiver.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

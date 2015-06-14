@@ -1,0 +1,1 @@
+regsvr32 "%~dp0\Binaries\Debug\LiferayNativityContextMenus_x64.dll"

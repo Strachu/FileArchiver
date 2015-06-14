@@ -1,0 +1,7 @@
+[submodule "Libraries/Sources/liferay-nativity"]
+	path = Libraries/Sources/liferay-nativity
+	url = https://github.com/Strachu/liferay-nativity
+	branch = CSharp_port
+[submodule "Libraries/Sources/7-zip"]
+	path = Libraries/Sources/7-zip
+	url = https://github.com/Strachu/7-zip
