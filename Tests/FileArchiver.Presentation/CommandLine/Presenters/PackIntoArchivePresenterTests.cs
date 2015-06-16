@@ -125,7 +125,7 @@ namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 
 			mTestedPresenter.PackFiles(files).Wait();
 
-			A.CallTo(() => mFileAddingServiceMock.AddFiles(mArchiveMock, null, files, A<FileAddingErrorHandler>.Ignored))
+			A.CallTo(() => mFileAddingServiceMock.AddFiles(mArchiveMock, Path.Root, files, A<FileAddingErrorHandler>.Ignored))
 			 .MustHaveHappened();
 			A.CallTo(() => mArchiveMock.SaveAsync(A<CancellationToken>.Ignored, A<IProgress<double?>>.Ignored))
 			 .MustHaveHappened();
