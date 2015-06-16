@@ -169,5 +169,45 @@ namespace FileArchiver.Core.Tests.ValueTypes
 
 			Assert.Throws<ArgumentException>(() => path.Remove(pathToRemove));
 		}
+
+		[Test]
+		public void WhenPathsAreUnrelated_IsAncestorOfReturnsFalseInBothCases()
+		{
+			var firstPath  = new Path("directory/subdirectory/file");
+			var secondPath = new Path("directory/another_subdirectory/file2");
+
+			Assert.That(firstPath.IsAncestorOf(secondPath), Is.False);
+			Assert.That(secondPath.IsAncestorOf(firstPath), Is.False);
+		}
+
+		[Test]
+		public void WhenPathsAreEqual_IsAncestorOfReturnsFalse()
+		{
+			var firstPath  = new Path("directory/subdirectory/file");
+			var secondPath = new Path("Directory/Subdirectory/file");
+
+			Assert.That(firstPath.IsAncestorOf(secondPath), Is.False);
+			Assert.That(secondPath.IsAncestorOf(firstPath), Is.False);
+		}
+
+		[Test]
+		public void WhenFirstPathsIsParentOfSecond_IsAncestorOfReturnsTrueForFirstPathButFalseForSecond()
+		{
+			var firstPath  = new Path("directory/subdirectory");
+			var secondPath = new Path("Directory/Subdirectory/file");
+
+			Assert.That(firstPath.IsAncestorOf(secondPath), Is.True);
+			Assert.That(secondPath.IsAncestorOf(firstPath), Is.False);
+		}
+
+		[Test]
+		public void WhenFirstPathsIsGrandParentOfSecond_IsAncestorOfReturnsTrueForFirstPathButFalseForSecond()
+		{
+			var firstPath  = new Path("directory");
+			var secondPath = new Path("Directory/Subdirectory/file");
+
+			Assert.That(firstPath.IsAncestorOf(secondPath), Is.True);
+			Assert.That(secondPath.IsAncestorOf(firstPath), Is.False);
+		}
 	}
 }

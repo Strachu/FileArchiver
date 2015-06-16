@@ -83,6 +83,31 @@ namespace FileArchiver.Core.ValueTypes
 			} 
 		}
 
+		/// <summary>
+		/// Checks whether the path represented by this object can point to a directory
+		/// which is an ancestor of a file pointed by given path.
+		/// </summary>
+		/// <param name="path">
+		/// The path to use during checking.
+		/// </param>
+		/// <returns>
+		/// True, if this path is an ancestor of given path, false otherwise.
+		/// </returns>
+		public bool IsAncestorOf(Path path)
+		{
+			Contract.Requires(path != null);
+
+			var parent = path;
+			while((parent = parent.ParentDirectory) != null)
+			{
+				if(parent.Equals(this))
+				{
+					return true;
+				}
+			}
+			return false;
+		}
+
 		public Path Combine(Path path)
 		{
 			Contract.Requires(path != null);

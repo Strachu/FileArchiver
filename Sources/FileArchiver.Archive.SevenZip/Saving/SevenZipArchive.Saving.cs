@@ -95,20 +95,7 @@ namespace FileArchiver.Archive.SevenZip
 
 		private IEnumerable<FileEntry> RemoveFileEntriesIfTheirParentsAreInList(IReadOnlyCollection<FileEntry> files)
 		{
-			return files.Where(x => !files.Any(file => IsAncestorOf(x, file)));
-		}
-
-		private bool IsAncestorOf(FileEntry thisEntry, FileEntry second)
-		{
-			var parent = second;
-			while((parent = parent.Parent) != null)
-			{
-				if(parent.Equals(thisEntry))
-				{
-					return true;
-				}
-			}
-			return false;
+			return files.Where(x => !files.Any(file => x.Path.IsAncestorOf(file.Path)));
 		}
 
 		private FileName GetRootDirectoryName(FileEntry entry)

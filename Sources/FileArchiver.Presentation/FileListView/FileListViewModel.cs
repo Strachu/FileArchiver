@@ -201,7 +201,7 @@ namespace FileArchiver.Presentation.FileListView
 		{
 			mUIThread.Send(() =>
 			{
-				if(IsAncestorOf(e.AddedFile.Path, CurrentDirectory) || e.AddedFile.Path.Equals(CurrentDirectory))
+				if(e.AddedFile.Path.IsAncestorOf(CurrentDirectory) || e.AddedFile.Path.Equals(CurrentDirectory))
 				{
 					ReloadFileList();
 					return;
@@ -219,19 +219,6 @@ namespace FileArchiver.Presentation.FileListView
 					ScrollTo(newFileViewModel);
 				}
 			});
-		}
-
-		private bool IsAncestorOf(Path thisPath, Path second)
-		{
-			var parent = second;
-			while((parent = parent.ParentDirectory) != null)
-			{
-				if(parent.Equals(thisPath))
-				{
-					return true;
-				}
-			}
-			return false;
 		}
 
 		private void ScrollTo(FileEntryViewModel fileToCenterAt)
