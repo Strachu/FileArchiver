@@ -79,7 +79,11 @@ namespace FileArchiver.Core.ValueTypes
 				if(this.Equals(Root))
 					return null;
 
-				return new Path(System.IO.Path.GetDirectoryName(mPath));
+				var parentDirectory = System.IO.Path.GetDirectoryName(mPath);
+				if(parentDirectory == null) // null is returned when GetDirectoryName is invoked with a hard disk letter
+					return null;
+
+				return new Path(parentDirectory);
 			} 
 		}
 

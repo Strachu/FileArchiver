@@ -99,6 +99,14 @@ namespace FileArchiver.Core.Tests.ValueTypes
 		}
 
 		[Test]
+		public void WhenPathPointsToDriveLetter_ParentDirectoryReturnsNull()
+		{
+			var path = new Path("C:/");
+
+			Assert.That(path.ParentDirectory, Is.Null);
+		}
+
+		[Test]
 		public void WhenFileIsInRootDirectory_ParentDirectoryContainsCorrectValueAndNotNull()
 		{
 			var path = new Path("Directory");
