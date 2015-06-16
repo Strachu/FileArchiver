@@ -199,19 +199,25 @@ namespace FileArchiver.Presentation.FileListView
 
 		private void Archive_FileAdded(object sender, FileAddedEventArgs e)
 		{
-			if(!e.AddedFile.Path.ParentDirectory.Equals(CurrentDirectory))
-				return;
-
 			mUIThread.Send(() =>
 			{
-				var newFileViewModel = new FileEntryViewModel(e.AddedFile, mFileIconProvider);
-				var newFileIndex = mFilesInCurrentDirectory.FindOrderedIndex(newFileViewModel);
+				if(e.AddedFile.Path.IsAncestorOf(CurrentDirectory) || e.AddedFile.Path.Equals(CurrentDirectory))
+				{
+					ReloadFileList();
+					return;
+				}
 
-				FilesInCurrentDirectory.Insert(newFileIndex, newFileViewModel);
+				if(e.AddedFile.Path.ParentDirectory.Equals(CurrentDirectory))
+				{
+					var newFileViewModel = new FileEntryViewModel(e.AddedFile, mFileIconProvider);
+					var newFileIndex     = mFilesInCurrentDirectory.FindOrderedIndex(newFileViewModel);
 
-				FilesInCurrentDirectory.ForEach(file => file.Selected = file.Name.Equals(e.AddedFile.Name));
+					FilesInCurrentDirectory.Insert(newFileIndex, newFileViewModel);
 
-				ScrollTo(newFileViewModel);
+					FilesInCurrentDirectory.ForEach(file => file.Selected = file.Name.Equals(e.AddedFile.Name));
+
+					ScrollTo(newFileViewModel);
+				}
 			});
 		}
 
