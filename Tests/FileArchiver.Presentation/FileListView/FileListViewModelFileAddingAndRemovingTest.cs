@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+
 using FakeItEasy;
 
+using FileArchiver.Core.Archive;
 using FileArchiver.Core.Utils;
 using FileArchiver.Core.ValueTypes;
 using FileArchiver.Presentation.FileListView;
@@ -97,6 +97,46 @@ namespace FileArchiver.Presentation.Tests.FileListView
 			mArchiveMock.RemoveFile(new Path("Directory2"));
 
 			AssertFileListChangedTo("File1", "File2", "File3", "Directory1", "Directory3");
+		}
+
+		[Test]
+		public void WhenDirectoryFileListIsUpdatedDirectly_FilesInCurrentDirectoryReflectsTheChange()
+		{
+			mTestedModel.SetArchive(mArchiveMock, new Path("C:\\archive.zip"));
+			mTestedModel.Open(new FileName("Directory2"));
+			mTestedModel.Open(new FileName("Directory1InDirectory2"));
+
+			var thisDirectory = mArchiveMock.GetFile(new Path("Directory2\\Directory1InDirectory2"));
+			var newFile       = new FileEntry.Builder().WithName(new FileName("NewFile")).Build();
+
+			thisDirectory     = thisDirectory.BuildCopy().WithoutFileNamed(new FileName("File1InNestedDirectory"))
+			                                             .WithNewFile(newFile).Build();
+
+			mArchiveMock.UpdateFile(thisDirectory);
+
+			AssertFileListChangedTo("File2InNestedDirectory", "NewFile");
+		}
+
+		[Test]
+		public void WhenDirectoryFileListIsUpdatedByModifyingItsAncestor_FilesInCurrentDirectoryReflectsTheChange()
+		{
+			mTestedModel.SetArchive(mArchiveMock, new Path("C:\\archive.zip"));
+			mTestedModel.Open(new FileName("Directory2"));
+			mTestedModel.Open(new FileName("Directory1InDirectory2"));
+
+			var parentDirectory = mArchiveMock.GetFile(new Path("Directory2"));
+			var thisDirectory   = parentDirectory.Files.Single(x => x.Name.Equals(new FileName("Directory1InDirectory2")));
+			var newFile         = new FileEntry.Builder().WithName(new FileName("NewFile")).Build();
+
+			thisDirectory       = thisDirectory.BuildCopy().WithoutFileNamed(new FileName("File1InNestedDirectory"))
+			                                               .WithNewFile(newFile).Build();
+
+			parentDirectory     = parentDirectory.BuildCopy().WithoutFileNamed(thisDirectory.Name)
+			                                                 .WithNewFile(thisDirectory).Build();
+
+			mArchiveMock.UpdateFile(parentDirectory);
+
+			AssertFileListChangedTo("File2InNestedDirectory", "NewFile");
 		}
 
 		[Test]
