@@ -84,21 +84,31 @@ namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 		}
 
 		[Test]
-		public void WhenOnlySingleFileIsPacked_DefaultArchivePathIsThePathOfFileMinusItsExtension()
+		public async Task WhenOnlySingleFileIsPacked_DefaultArchivePathIsThePathOfFileMinusItsExtension()
 		{
-			mTestedPresenter.PackFiles(new Path("C:\\Directory\\File.txt")).Wait();
+			await mTestedPresenter.PackFiles(new Path("C:\\Directory\\File.txt"));
 
 			A.CallTo(() => mArchiveSettingsViewMock.Show(new Path("C:\\Directory\\File"), A<bool>.Ignored)).MustHaveHappened();
 		}
 
 		[Test]
-		public void WhenMultipleFilesAreToBePacked_DefaultArchiveNameIsParentDirectoryName()
+		public async Task WhenMultipleFilesAreToBePacked_DefaultArchiveNameIsParentDirectoryName()
 		{
-			mTestedPresenter.PackFiles(new Path("C:\\Directory\\File.txt"),
-			                           new Path("C:\\Directory\\File2.txt"),
-			                           new Path("C:\\Directory\\Directory\\File.txt")).Wait();
+			await mTestedPresenter.PackFiles(new Path("C:\\Directory\\File.txt"),
+			                                 new Path("C:\\Directory\\File2.txt"),
+			                                 new Path("C:\\Directory\\Directory\\File.txt"));
 
 			A.CallTo(() => mArchiveSettingsViewMock.Show(new Path("C:\\Directory\\Directory"), A<bool>.Ignored)).MustHaveHappened();
+		}
+
+		[Test]
+		public async Task WhenMultipleFilesFromRootDirectoryArePacked_TheNameOfFirstFileIsUsedAsArchiveName()
+		{
+			await mTestedPresenter.PackFiles(new Path("C:\\File.txt"),
+			                                 new Path("C:\\File2.txt"),
+			                                 new Path("C:\\Directory\\File.txt"));
+
+			A.CallTo(() => mArchiveSettingsViewMock.Show(new Path("C:\\File"), A<bool>.Ignored)).MustHaveHappened();
 		}
 
 		[Test]

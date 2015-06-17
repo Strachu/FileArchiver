@@ -127,7 +127,12 @@ namespace FileArchiver.Presentation.CommandLine.Presenters
 		private Path DetermineDefaultArchivePath(IReadOnlyCollection<Path> filePaths)
 		{
 			var parentDirectory = filePaths.First().ParentDirectory;
-			var archiveFileName = (filePaths.Count == 1) ? filePaths.First().RemoveExtension() : parentDirectory.FileName;
+			var archiveFileName = parentDirectory.FileName;
+
+			if(filePaths.Count == 1 || archiveFileName == null)
+			{
+				archiveFileName = filePaths.First().RemoveExtension().FileName;
+			}
 
 			return parentDirectory.Combine(archiveFileName);
 		}

@@ -91,6 +91,20 @@ namespace FileArchiver.Core.Tests.ValueTypes
 		}
 
 		[Test]
+		public void WhenGettingNameForRootDirectory_NullIsReturned()
+		{
+			Assert.That(Path.Root.FileName, Is.Null);
+		}
+
+		[Test]
+		public void WhenGettingNameForDriveRootDirectory_NullIsReturned()
+		{
+			var path = new Path("C:");
+
+			Assert.That(path.FileName, Is.Null);
+		}
+
+		[Test]
 		public void ParentDirectoryPropertyContainsCorrectValue()
 		{
 			var path = new Path("Directory/Subdirectory/File.txt");
@@ -120,6 +134,16 @@ namespace FileArchiver.Core.Tests.ValueTypes
 			var path = new Path("");
 
 			Assert.That(path.ParentDirectory, Is.Null);
+		}
+
+		[Test]
+		public void WhenFirstPathIsDriveLetter_CombineAddsSlashCorrectly()
+		{
+			var firstPath    = new Path("C:");
+			var secondPath   = new Path("Directory");
+			var combinedPath = firstPath.Combine(secondPath);
+
+			Assert.That(combinedPath, Is.EqualTo(new Path("C:/Directory")));
 		}
 
 		[Test]

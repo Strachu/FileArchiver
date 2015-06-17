@@ -69,7 +69,17 @@ namespace FileArchiver.Core.ValueTypes
 
 		public FileName FileName
 		{
-			get { return new FileName(System.IO.Path.GetFileName(mPath)); }
+			get
+			{
+				if(this.Equals(Root))
+					return null;
+
+				var name = System.IO.Path.GetFileName(mPath);
+				if(String.IsNullOrEmpty(name))
+					return null;
+
+				return new FileName(name);
+			}
 		}
 
 		public Path ParentDirectory
@@ -116,7 +126,15 @@ namespace FileArchiver.Core.ValueTypes
 		{
 			Contract.Requires(path != null);
 
-			return new Path(System.IO.Path.Combine(mPath, path));
+			return IsDriveLetter() ? new Path(mPath + '/' + path) : new Path(System.IO.Path.Combine(mPath, path));
+		}
+
+		private bool IsDriveLetter()
+		{
+			if(String.IsNullOrWhiteSpace(mPath))
+				return false;
+
+			return mPath.Last() == ':';
 		}
 
 		/// <summary>
