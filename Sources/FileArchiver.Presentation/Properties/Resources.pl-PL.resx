@@ -203,7 +203,7 @@ Szczegóły: {0}</value>
 Szczegóły: {0}</value>
   </data>
   <data name="NotSupportedFormatError" xml:space="preserve">
-    <value>Nie udało się otwrzyć archiwum. Format pliku {0} jest nieobsługiwany.</value>
+    <value>Nie udało się otworzyć archiwum. Format pliku {0} jest nieobsługiwany.</value>
   </data>
   <data name="PackError" xml:space="preserve">
     <value>Wystąpił błąd podczas pakowania plików.
