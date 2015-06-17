@@ -68,7 +68,7 @@ namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 				var assemblyLocation  = new Path(Assembly.GetExecutingAssembly().Location);
 				var assemblyDirectory = assemblyLocation.ParentDirectory;
 
-				return assemblyDirectory.Combine(new FileName("7zr"));
+				return assemblyDirectory.Combine(new FileName("7za"));
 			}
 		}
 

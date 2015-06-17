@@ -45,11 +45,19 @@ namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 		{
 			Contract.Requires(archivePath != null);
 
-			using(var process = SevenZipProcess.Execute(String.Format("l -t7z \"{0}\" do_not_list_files", archivePath)))
+			using(var process = SevenZipProcess.Execute(String.Format("l \"{0}\" do_not_list_files", archivePath)))
 			{
-				process.StandardOutput.ReadToEnd();
+				var fileListReader = new FileListingReader(process.StandardOutput);
+				try
+				{
+					var archiveProperties = fileListReader.ReadArchiveProperties();
 
-				return process.ExitedWithoutError;
+					return archiveProperties["Type"] == "7z";
+				}
+				catch(EndOfStreamException)
+				{
+					return false;
+				}
 			}
 		}
 
