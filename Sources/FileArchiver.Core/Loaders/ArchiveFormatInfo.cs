@@ -28,15 +28,16 @@ namespace FileArchiver.Core.Loaders
 	/// </summary>
 	public class ArchiveFormatInfo
 	{
-		public ArchiveFormatInfo(string extension, string localizedDescription, bool supportsCompression)
+		public ArchiveFormatInfo(string extension, string localizedDescription, bool supportsCompression, bool supportsMultipleFiles)
 		{
 			Contract.Requires(!String.IsNullOrWhiteSpace(extension));
 			Contract.Requires(extension.StartsWith("."));
 			Contract.Requires(!String.IsNullOrWhiteSpace(localizedDescription));
 
-			Extension            = extension;
-			LocalizedDescription = localizedDescription;
-			SupportsCompression  = supportsCompression;
+			Extension             = extension;
+			LocalizedDescription  = localizedDescription;
+			SupportsCompression   = supportsCompression;
+			SupportsMultipleFiles = supportsMultipleFiles;
 		}
 
 		/// <summary>
@@ -68,6 +69,15 @@ namespace FileArchiver.Core.Loaders
 		/// For example, the descriptor for TAR archive should return false to allow it to be embedded into a GZip stream.
 		/// </remarks>
 		public bool SupportsCompression
+		{
+			get;
+			private set;
+		}
+
+		/// <summary>
+		/// Indicates whether the archive can contain multiple files.
+		/// </summary>
+		public bool SupportsMultipleFiles
 		{
 			get;
 			private set;

@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.IO;
+using System.IO.Abstractions;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -40,21 +41,25 @@ namespace FileArchiver.Presentation.CommandLine.Presenters
 	{
 		private readonly IPackIntoArchiveView             mView;
 		private readonly INewArchiveSettingsScreen        mArchiveSettingsView;
+		private readonly IFileSystem                      mFileSystem;
 		private readonly IArchiveLoadingService           mLoadingService;
 		private readonly IFromFileSystemFileAddingService mFileAddingService;
 
 		public PackIntoArchivePresenter(IPackIntoArchiveView view,
 		                                INewArchiveSettingsScreen archiveSettingsScreen,
+		                                IFileSystem fileSystem,
 		                                IArchiveLoadingService loadingService,
 		                                IFromFileSystemFileAddingService fileAddingService)
 		{
 			Contract.Requires(view != null);
 			Contract.Requires(archiveSettingsScreen != null);
+			Contract.Requires(fileSystem != null);
 			Contract.Requires(loadingService != null);
 			Contract.Requires(fileAddingService != null);
 
 			mView                = view;
 			mArchiveSettingsView = archiveSettingsScreen;
+			mFileSystem          = fileSystem;
 			mLoadingService      = loadingService;
 			mFileAddingService   = fileAddingService;
 		}
@@ -74,12 +79,13 @@ namespace FileArchiver.Presentation.CommandLine.Presenters
 
 			try
 			{
-				var archiveDestinationPath = DetermineDefaultArchivePath(filePaths);
+				var archiveDestinationPath      = DetermineDefaultArchivePath(filePaths);
+				var allowSingleFileArchiveTypes = IsSingleFileArchiveTypeAllowed(filePaths);
 
 				// TODO should ask whether to overwrite if the user accepts default path and the file already exists
 				//  - or ask inside the new archive settings dialog as the path can be entered manually without using the file dialog?
 
-				var archiveSettings = mArchiveSettingsView.Show(archiveDestinationPath);
+				var archiveSettings = mArchiveSettingsView.Show(archiveDestinationPath, allowSingleFileArchiveTypes);
 				if(archiveSettings == null)
 					return;
 
@@ -124,6 +130,19 @@ namespace FileArchiver.Presentation.CommandLine.Presenters
 			var archiveFileName = (filePaths.Count == 1) ? filePaths.First().RemoveExtension() : parentDirectory.FileName;
 
 			return parentDirectory.Combine(archiveFileName);
+		}
+
+		private bool IsSingleFileArchiveTypeAllowed(IReadOnlyCollection<Path> files)
+		{
+			if(files.Count > 1)
+				return false;
+
+			return !files.Any(IsDirectory);
+		}
+
+		private bool IsDirectory(Path path)
+		{
+			return mFileSystem.FileInfo.FromFileName(path).Attributes.HasFlag(FileAttributes.Directory);
 		}
 	}
 }

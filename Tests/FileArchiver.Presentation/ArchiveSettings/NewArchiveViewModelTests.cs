@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Linq.Expressions;
 
 using FakeItEasy;
 
@@ -30,9 +29,9 @@ namespace FileArchiver.Presentation.Tests.ArchiveSettings
 		{
 			var supportedFormats = new ArchiveFormatInfo[]
 			{
-				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true),
-				new ArchiveFormatInfo(".tar", "Test", supportsCompression: false),
-				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true),
+				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true,  supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".tar", "Test", supportsCompression: false, supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true,  supportsMultipleFiles: true),
 			};
 
 			mZipSettingsViewModelMock = A.Fake<IArchiveSettingsViewModel>(x => x.Implements(typeof(INotifyPropertyChanged)));
@@ -63,9 +62,9 @@ namespace FileArchiver.Presentation.Tests.ArchiveSettings
 		{
 			var supportedFormats = new ArchiveFormatInfo[]
 			{
-				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true),
-				new ArchiveFormatInfo(".tar", "Test", supportsCompression: true),
-				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true)
+				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true, supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".tar", "Test", supportsCompression: true, supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true, supportsMultipleFiles: true)
 			};
 
 			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { });
@@ -78,9 +77,9 @@ namespace FileArchiver.Presentation.Tests.ArchiveSettings
 		{
 			var supportedFormats = new ArchiveFormatInfo[]
 			{
-				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true),
-				new ArchiveFormatInfo(".tar", "Test", supportsCompression: false),
-				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true)
+				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true,  supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".tar", "Test", supportsCompression: false, supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true,  supportsMultipleFiles: true)
 			};
 
 			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { });
@@ -94,8 +93,8 @@ namespace FileArchiver.Presentation.Tests.ArchiveSettings
 		{
 			var supportedFormats = new ArchiveFormatInfo[]
 			{
-				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true),
-				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true)
+				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true, supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true, supportsMultipleFiles: true)
 			};
 
 			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { });

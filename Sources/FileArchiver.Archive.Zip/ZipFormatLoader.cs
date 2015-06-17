@@ -54,9 +54,10 @@ namespace FileArchiver.Archive.Zip
 			{
 				return new ArchiveFormatInfo
 				(
-					extension            : ".zip",
-					localizedDescription : Lang.ArchiveDescription,
-					supportsCompression  : true
+					extension             : ".zip",
+					localizedDescription  : Lang.ArchiveDescription,
+					supportsCompression   : true,
+					supportsMultipleFiles : true
 				);
 			}
 		}

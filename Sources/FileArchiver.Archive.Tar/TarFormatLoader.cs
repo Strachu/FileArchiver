@@ -48,9 +48,10 @@ namespace FileArchiver.Archive.Tar
 			{
 				return new ArchiveFormatInfo
 				(
-					extension            : ".tar",
-					localizedDescription : Lang.ArchiveDescription,
-					supportsCompression  : false
+					extension             : ".tar",
+					localizedDescription  : Lang.ArchiveDescription,
+					supportsCompression   : false,
+					supportsMultipleFiles : true
 				);
 			}
 		}

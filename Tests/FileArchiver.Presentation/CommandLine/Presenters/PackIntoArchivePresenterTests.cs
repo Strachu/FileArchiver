@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Abstractions;
 using System.Threading;
+using System.Threading.Tasks;
 
 using FakeItEasy;
 
@@ -14,7 +16,8 @@ using FileArchiver.Presentation.Progress;
 
 using NUnit.Framework;
 
-using Path = FileArchiver.Core.ValueTypes.Path;
+using IFileSystem = System.IO.Abstractions.IFileSystem;
+using Path        = FileArchiver.Core.ValueTypes.Path;
 
 namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 {
@@ -22,6 +25,7 @@ namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 	{
 		private IPackIntoArchiveView             mViewMock;
 		private INewArchiveSettingsScreen        mArchiveSettingsViewMock;
+		private IFileSystem                      mFileSystemMock;
 		private IArchiveLoadingService           mLoadingServiceMock;
 		private IFromFileSystemFileAddingService mFileAddingServiceMock;
 		private IArchive                         mArchiveMock;
@@ -33,18 +37,19 @@ namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 		{
 			mViewMock                = A.Fake<IPackIntoArchiveView>();
 			mArchiveSettingsViewMock = A.Fake<INewArchiveSettingsScreen>();
+			mFileSystemMock          = A.Fake<IFileSystem>();
 			mLoadingServiceMock      = A.Fake<IArchiveLoadingService>();
 			mFileAddingServiceMock   = A.Fake<IFromFileSystemFileAddingService>();
 			mArchiveMock             = A.Fake<IArchive>();
 
-			mTestedPresenter = new PackIntoArchivePresenter(mViewMock, mArchiveSettingsViewMock, mLoadingServiceMock,
-			                                                mFileAddingServiceMock);
+			mTestedPresenter = new PackIntoArchivePresenter(mViewMock, mArchiveSettingsViewMock, mFileSystemMock,
+			                                                mLoadingServiceMock, mFileAddingServiceMock);
 
 			A.CallTo(() => mLoadingServiceMock.CreateNew(null, null)).WithAnyArguments().Returns(mArchiveMock);
 
 			var fakeArchiveSettings = new NewArchiveSettings(new Path("Fake"), A.Fake<IEnumerable<ArchiveFormatWithSettings>>());
 
-			A.CallTo(() => mArchiveSettingsViewMock.Show(null)).WithAnyArguments().Returns(fakeArchiveSettings);
+			A.CallTo(() => mArchiveSettingsViewMock.Show(null, false)).WithAnyArguments().Returns(fakeArchiveSettings);
 		}
 
 		[Test]
@@ -65,13 +70,13 @@ namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 		{
 			mTestedPresenter.PackFiles(new Path("C:\\Directory\\File")).Wait();
 
-			A.CallTo(() => mArchiveSettingsViewMock.Show(null)).WithAnyArguments().MustHaveHappened();
+			A.CallTo(() => mArchiveSettingsViewMock.Show(null, false)).WithAnyArguments().MustHaveHappened();
 		}
 
 		[Test]
 		public void WhenUserClickedCancelInArchiveSettings_ArchiveShouldNotBeCreated()
 		{
-			A.CallTo(() => mArchiveSettingsViewMock.Show(null)).WithAnyArguments().Returns(null);
+			A.CallTo(() => mArchiveSettingsViewMock.Show(null, false)).WithAnyArguments().Returns(null);
 
 			mTestedPresenter.PackFiles(new Path("C:\\Directory\\File")).Wait();
 
@@ -83,7 +88,7 @@ namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 		{
 			mTestedPresenter.PackFiles(new Path("C:\\Directory\\File.txt")).Wait();
 
-			A.CallTo(() => mArchiveSettingsViewMock.Show(new Path("C:\\Directory\\File"))).MustHaveHappened();
+			A.CallTo(() => mArchiveSettingsViewMock.Show(new Path("C:\\Directory\\File"), A<bool>.Ignored)).MustHaveHappened();
 		}
 
 		[Test]
@@ -93,7 +98,37 @@ namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 			                           new Path("C:\\Directory\\File2.txt"),
 			                           new Path("C:\\Directory\\Directory\\File.txt")).Wait();
 
-			A.CallTo(() => mArchiveSettingsViewMock.Show(new Path("C:\\Directory\\Directory"))).MustHaveHappened();
+			A.CallTo(() => mArchiveSettingsViewMock.Show(new Path("C:\\Directory\\Directory"), A<bool>.Ignored)).MustHaveHappened();
+		}
+
+		[Test]
+		public async Task WhenOnlySingleFileIsPacked_AllArchiveTypesAreAllowed()
+		{
+			await mTestedPresenter.PackFiles(new Path("C:\\Directory\\File.txt"));
+
+			A.CallTo(() => mArchiveSettingsViewMock.Show(A<Path>.Ignored, true)).MustHaveHappened();
+		}
+
+		[Test]
+		public async Task WhenMultipleFilesAreToBePacked_OnlyArchiveTypesSupportingMultipleFilesAreAllowed()
+		{
+			await mTestedPresenter.PackFiles(new Path("C:\\Directory\\File.txt"),
+			                                 new Path("C:\\Directory\\File2.txt"),
+			                                 new Path("C:\\Directory\\Directory\\File.txt"));
+
+			A.CallTo(() => mArchiveSettingsViewMock.Show(A<Path>.Ignored, false)).MustHaveHappened();
+		}
+
+		[Test]
+		public async Task WhenDirectoryIsPacked_OnlyArchiveTypesSupportingMultipleFilesAreAllowed()
+		{
+			var fileInfo = A.Fake<FileInfoBase>();
+			A.CallTo(() => fileInfo.Attributes).Returns(FileAttributes.Directory);
+			A.CallTo(() => mFileSystemMock.FileInfo.FromFileName(A<string>.Ignored)).Returns(fileInfo);
+
+			await mTestedPresenter.PackFiles(new Path("C:\\Directory"));
+
+			A.CallTo(() => mArchiveSettingsViewMock.Show(A<Path>.Ignored, false)).MustHaveHappened();
 		}
 
 		[Test]
@@ -103,7 +138,7 @@ namespace FileArchiver.Presentation.Tests.CommandLine.Presenters
 			var archiveFormatSettingsArray = new [] { new ArchiveFormatWithSettings(".zip", null) };
 			var newArchiveSettings         = new NewArchiveSettings(destinationPath, archiveFormatSettingsArray);
 
-			A.CallTo(() => mArchiveSettingsViewMock.Show(null)).WithAnyArguments().Returns(newArchiveSettings);
+			A.CallTo(() => mArchiveSettingsViewMock.Show(null, false)).WithAnyArguments().Returns(newArchiveSettings);
 
 			mTestedPresenter.PackFiles(new Path("C:\\Directory\\File.txt")).Wait();
 

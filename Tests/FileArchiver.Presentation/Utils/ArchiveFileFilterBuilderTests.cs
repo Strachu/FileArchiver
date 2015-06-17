@@ -18,9 +18,10 @@ namespace FileArchiver.Presentation.Tests.Utils
 			{
 				new ArchiveFormatInfo
 				(
-					localizedDescription : "Zip archive",
-					extension            : ".zip",
-					supportsCompression  : false
+					localizedDescription  : "Zip archive",
+					extension             : ".zip",
+					supportsCompression   : false,
+					supportsMultipleFiles : true
 				)
 			};
 
@@ -37,21 +38,24 @@ namespace FileArchiver.Presentation.Tests.Utils
 			{
 				new ArchiveFormatInfo
 				(
-					localizedDescription : "Zip archive",
-					extension            : ".zip",
-					supportsCompression  : false
+					localizedDescription  : "Zip archive",
+					extension             : ".zip",
+					supportsCompression   : false,
+					supportsMultipleFiles : true
 				),
 				new ArchiveFormatInfo
 				(
-					localizedDescription : "Tar archive",
-					extension            : ".tar",
-					supportsCompression  : false
+					localizedDescription  : "Tar archive",
+					extension             : ".tar",
+					supportsCompression   : false,
+					supportsMultipleFiles : true
 				),
 				new ArchiveFormatInfo
 				(
-					localizedDescription : "7-zip archive",
-					extension            : ".7z",
-					supportsCompression  : false
+					localizedDescription  : "7-zip archive",
+					extension             : ".7z",
+					supportsCompression   : false,
+					supportsMultipleFiles : true
 				)
 			};
 

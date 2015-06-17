@@ -50,9 +50,10 @@ namespace FileArchiver.Archive.SevenZip
 			{
 				return new ArchiveFormatInfo
 				(
-					extension            : ".7z",
-					localizedDescription : Lang.ArchiveDescription,
-					supportsCompression  : true
+					extension             : ".7z",
+					localizedDescription  : Lang.ArchiveDescription,
+					supportsCompression   : true,
+					supportsMultipleFiles : true
 				);
 			}
 		}

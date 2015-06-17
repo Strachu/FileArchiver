@@ -47,9 +47,10 @@ namespace FileArchiver.Archive.GZip
 			{
 				return new ArchiveFormatInfo
 				(
-					extension            : ".gz",
-					localizedDescription : Lang.ArchiveDescription,
-					supportsCompression  : true
+					extension             : ".gz",
+					localizedDescription  : Lang.ArchiveDescription,
+					supportsCompression   : true,
+					supportsMultipleFiles : false
 				);
 			}
 		}
