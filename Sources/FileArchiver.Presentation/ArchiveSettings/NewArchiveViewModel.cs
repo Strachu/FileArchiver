@@ -50,8 +50,12 @@ namespace FileArchiver.Presentation.ArchiveSettings
 		/// <param name="settingsFactories">
 		/// The collection of factories for view models describing format specific settings.
 		/// </param>
+		/// <param name="allowSingleFileArchives">
+		/// Whether to show archive types not supporting multiple files as available.
+		/// </param>
 		public NewArchiveViewModel(IReadOnlyCollection<ArchiveFormatInfo> supportedFormats,
-		                           IReadOnlyCollection<IArchiveSettingsViewModelFactory> settingsFactories)
+		                           IReadOnlyCollection<IArchiveSettingsViewModelFactory> settingsFactories,
+		                           bool allowSingleFileArchives)
 		{
 			Contract.Requires(supportedFormats != null);
 			Contract.Requires(Contract.ForAll(supportedFormats, format => format != null));
@@ -59,16 +63,20 @@ namespace FileArchiver.Presentation.ArchiveSettings
 			Contract.Requires(Contract.ForAll(settingsFactories, factory => factory != null));
 
 			// TODO move to a different class?
-			ConstructFormatToSettingsViewModelsMapping(supportedFormats, settingsFactories);
+			ConstructFormatToSettingsViewModelsMapping(supportedFormats, settingsFactories, allowSingleFileArchives);
 
 			AvailableArchiveFormats = mArchiveSettingsViewModels.Keys;
 			ArchiveFormat           = AvailableArchiveFormats.First();
 		}
 
 		private void ConstructFormatToSettingsViewModelsMapping(IReadOnlyCollection<ArchiveFormatInfo> supportedFormats,
-		                                                        IReadOnlyCollection<IArchiveSettingsViewModelFactory> settingsFactories)
+		                                                        IReadOnlyCollection<IArchiveSettingsViewModelFactory>
+			                                                        settingsFactories,
+		                                                        bool includeSingleFileArchives)
 		{
-			foreach(var format in supportedFormats)
+			var supportedFormatsForFiles = GetFormatsSuitableForStoringFiles(supportedFormats, !includeSingleFileArchives);
+
+			foreach(var format in supportedFormatsForFiles)
 			{
 				mArchiveSettingsViewModels[format.Extension] = new List<IArchiveSettingsViewModel>
 				{
@@ -80,6 +88,15 @@ namespace FileArchiver.Presentation.ArchiveSettings
 					AllowEmbeddingIntoArchivesSupportingCompression(format.Extension, supportedFormats, settingsFactories);
 				}
 			}
+		}
+
+		private IEnumerable<ArchiveFormatInfo> GetFormatsSuitableForStoringFiles(IEnumerable<ArchiveFormatInfo> supportedFormats,
+			                                                                      bool mustSupportMultipleFiles)
+		{
+			if(!mustSupportMultipleFiles)
+				return supportedFormats;
+
+			return supportedFormats.Where(format => format.SupportsMultipleFiles);
 		}
 
 		private IArchiveSettingsViewModel GetSettingsViewModel(string formatExtension, IEnumerable<IArchiveSettingsViewModelFactory> viewModelFactories)

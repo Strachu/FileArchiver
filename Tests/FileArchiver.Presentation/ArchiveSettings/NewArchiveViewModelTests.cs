@@ -43,7 +43,8 @@ namespace FileArchiver.Presentation.Tests.ArchiveSettings
 				CreateViewModelFactoryFor(".tar", mTarSettingsViewModelMock),
 			};
 
-			mTestedViewModel = new NewArchiveViewModel(supportedFormats, settingsViewModelFactories);
+			mTestedViewModel = new NewArchiveViewModel(supportedFormats, settingsViewModelFactories,
+			                                           allowSingleFileArchives: true);
 		}
 
 		private IArchiveSettingsViewModelFactory CreateViewModelFactoryFor(string extension,
@@ -67,7 +68,7 @@ namespace FileArchiver.Presentation.Tests.ArchiveSettings
 				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true, supportsMultipleFiles: true)
 			};
 
-			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { });
+			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { }, true);
 
 			Assert.That(viewModel.AvailableArchiveFormats, Is.EquivalentTo(new string[] { ".zip", ".tar", ".7z" }));
 		}
@@ -82,10 +83,59 @@ namespace FileArchiver.Presentation.Tests.ArchiveSettings
 				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true,  supportsMultipleFiles: true)
 			};
 
-			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { });
+			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { }, true);
 
 			Assert.That(viewModel.AvailableArchiveFormats,
 			            Is.EquivalentTo(new string[] { ".zip", ".tar", ".tar.zip", ".tar.7z", ".7z" }));
+		}
+
+		[Test]
+		public void WhenSingleFileArchivesAreAllowed_AllFormatsAreListedAsAvailable()
+		{
+			var supportedFormats = new ArchiveFormatInfo[]
+			{
+				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true, supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".gz",  "Test", supportsCompression: true, supportsMultipleFiles: false),
+				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true, supportsMultipleFiles: true)
+			};
+
+			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { },
+																 allowSingleFileArchives: true);
+
+			Assert.That(viewModel.AvailableArchiveFormats, Is.EquivalentTo(new string[] { ".zip", ".gz", ".7z" }));
+		}
+
+		[Test]
+		public void WhenSingleFileArchivesAreNotAllowed_OnlyFormatsSupportingMultipleFilesAreListedAsAvailable()
+		{
+			var supportedFormats = new ArchiveFormatInfo[]
+			{
+				new ArchiveFormatInfo(".zip", "Test", supportsCompression: true, supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".gz",  "Test", supportsCompression: true, supportsMultipleFiles: false),
+				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true, supportsMultipleFiles: true)
+			};
+
+			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { },
+																 allowSingleFileArchives: false);
+
+			Assert.That(viewModel.AvailableArchiveFormats, Is.EquivalentTo(new string[] { ".zip", ".7z" }));
+		}
+
+		[Test]
+		public void WhenSingleFileArchivesAreNotAllowed_SingleFileArchivesCanStillBeUsedAsCompressionArchives()
+		{
+			var supportedFormats = new ArchiveFormatInfo[]
+			{
+				new ArchiveFormatInfo(".tar", "Test", supportsCompression: false, supportsMultipleFiles: true),
+				new ArchiveFormatInfo(".gz",  "Test", supportsCompression: true,  supportsMultipleFiles: false),
+				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true,  supportsMultipleFiles: true)
+			};
+
+			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { },
+																 allowSingleFileArchives: false);
+
+			Assert.That(viewModel.AvailableArchiveFormats,
+			            Is.EquivalentTo(new string[] { ".tar", ".tar.gz", ".tar.7z", ".7z" }));
 		}
 
 		[Test]
@@ -97,7 +147,7 @@ namespace FileArchiver.Presentation.Tests.ArchiveSettings
 				new ArchiveFormatInfo(".7z",  "Test", supportsCompression: true, supportsMultipleFiles: true)
 			};
 
-			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { });
+			var viewModel = new NewArchiveViewModel(supportedFormats, new IArchiveSettingsViewModelFactory[] { }, true);
 
 			Assert.That(supportedFormats.Select(f => f.Extension), Has.Member(viewModel.ArchiveFormat));
 		}

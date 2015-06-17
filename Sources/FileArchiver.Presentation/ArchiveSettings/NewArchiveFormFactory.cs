@@ -20,7 +20,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
-using FileArchiver.Core.Archive;
+
 using FileArchiver.Core.Loaders;
 using FileArchiver.Core.ValueTypes;
 using FileArchiver.Presentation.ArchiveSettings.Framework;
@@ -48,10 +48,9 @@ namespace FileArchiver.Presentation.ArchiveSettings
 
 		public NewArchiveSettings Show(Path defaultDestinationPath, bool allowSingleFileArchives)
 		{
-			var supportedFormats = GetSupportedFormats(allowSingleFileArchives);
-
-			var viewModel        = new NewArchiveViewModel(supportedFormats.ToList(), mSettingsFactories.ToList());
-			var view             = new NewArchiveForm(viewModel, mControlsFactory);
+			var viewModel = new NewArchiveViewModel(mLoadingService.SupportedFormats.ToList(), mSettingsFactories.ToList(),
+			                                        allowSingleFileArchives);
+			var view      = new NewArchiveForm(viewModel, mControlsFactory);
 
 			if(defaultDestinationPath != null)
 			{
@@ -61,14 +60,6 @@ namespace FileArchiver.Presentation.ArchiveSettings
 			view.ShowDialog();
 
 			return viewModel.AcceptedSettings;
-		}
-
-		private IEnumerable<ArchiveFormatInfo> GetSupportedFormats(bool includeSingleFileArchives)
-		{
-			if(includeSingleFileArchives)
-				return mLoadingService.SupportedFormats;
-
-			return mLoadingService.SupportedFormats.Where(format => format.SupportsMultipleFiles);
 		}
 	}
 }
