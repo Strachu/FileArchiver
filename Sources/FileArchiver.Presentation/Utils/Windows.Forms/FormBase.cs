@@ -37,6 +37,8 @@ namespace FileArchiver.Presentation.Utils.Windows.Forms
 
 		protected override void OnShown(EventArgs e)
 		{
+			CenterToScreenIfNoParent();
+
 			base.OnShown(e);
 
 			mOpenForms.Add(this);
@@ -57,11 +59,19 @@ namespace FileArchiver.Presentation.Utils.Windows.Forms
 			{
 				base.ShowIcon      = true;
 				base.Icon          = Resources.ApplicationIcon;
-				base.StartPosition = FormStartPosition.CenterScreen;
 				base.ShowInTaskbar = true;
 			}
 
 			base.CreateHandle();
+		}
+
+		private void CenterToScreenIfNoParent()
+		{
+			// May happen when showing a modal dialog and there is no window with focus.
+			if(base.StartPosition == FormStartPosition.CenterParent && base.Owner == null && Form.ActiveForm == null)
+			{
+				base.CenterToScreen();
+			}
 		}
 	}
 }
