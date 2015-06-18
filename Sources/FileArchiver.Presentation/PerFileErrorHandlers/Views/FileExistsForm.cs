@@ -21,7 +21,8 @@ using System;
 using System.ComponentModel;
 using System.Diagnostics.Contracts;
 using System.Drawing;
-using System.Windows.Forms;
+
+using FileArchiver.Presentation.Utils.Windows.Forms;
 
 using Path = FileArchiver.Core.ValueTypes.Path;
 
@@ -31,7 +32,7 @@ namespace FileArchiver.Presentation.PerFileErrorHandlers
 	/// A form displayed to the user when the collision of file names occurs
 	/// giving the user possibility to choose an action.
 	/// </summary>
-	internal partial class FileExistsForm : Form
+	internal partial class FileExistsForm : FormBase
 	{
 		private readonly ComponentResourceManager mLang = new ComponentResourceManager(typeof(FileExistsForm));
 

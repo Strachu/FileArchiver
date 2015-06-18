@@ -22,6 +22,8 @@ using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Windows.Forms;
 
+using FileArchiver.Presentation.Utils.Windows.Forms;
+
 using Lang = FileArchiver.Presentation.Properties.Resources;
 
 namespace FileArchiver.Presentation.Progress
@@ -29,7 +31,7 @@ namespace FileArchiver.Presentation.Progress
 	/// <summary>
 	/// A form displaying the progress of an arbitrary operation and giving the user ability to cancel it.
 	/// </summary>
-	internal partial class ProgressForm : Form, IProgressView
+	internal partial class ProgressForm : FormBase, IProgressView
 	{
 		private readonly CancellationTokenSource mCancelTokenSource;
 

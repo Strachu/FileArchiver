@@ -20,15 +20,16 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Linq.Expressions;
 using System.Windows.Forms;
+
 using FileArchiver.Presentation.ArchiveSettings.Framework;
+using FileArchiver.Presentation.Utils.Windows.Forms;
 
 using Lang = FileArchiver.Presentation.Properties.Resources;
 
 namespace FileArchiver.Presentation.ArchiveSettings
 {
-	internal partial class NewArchiveForm : Form
+	internal partial class NewArchiveForm : FormBase
 	{
 		private readonly NewArchiveViewModel mViewModel;
 

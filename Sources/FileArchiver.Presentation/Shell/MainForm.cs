@@ -33,7 +33,7 @@ using FileArchiver.Presentation.Utils.Windows.Forms;
 
 namespace FileArchiver.Presentation.Shell
 {
-	internal partial class MainForm : Form, IMainView
+	internal partial class MainForm : FormBase, IMainView
 	{
 		private readonly FileListPanel mFileListPanel = DependencyInjectionContainer.Instance.Get<FileListPanel>();
 
@@ -68,6 +68,8 @@ namespace FileArchiver.Presentation.Shell
 			mAddToolbarButton.Command         = DependencyInjectionContainer.Instance.Get<AddFilesCommand>();
 			mExtractToolbarButton.Command     = DependencyInjectionContainer.Instance.Get<ExtractFilesCommand>();
 			mRemoveToolbarButton.Command      = DependencyInjectionContainer.Instance.Get<RemoveFilesCommand>();
+
+			base.OnLoad(e);
 		}
 
 		public string Title
