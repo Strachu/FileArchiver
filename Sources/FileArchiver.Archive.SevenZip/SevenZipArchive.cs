@@ -19,11 +19,11 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FileArchiver.Archive.SevenZip.Settings;
 using FileArchiver.Core.Archive;
 using FileArchiver.Core.Services;
 using FileArchiver.Core.Utils;
@@ -34,15 +34,15 @@ namespace FileArchiver.Archive.SevenZip
 {
 	public partial class SevenZipArchive : ArchiveBase
 	{
-		private readonly SevenZipCommunication.SevenZip         mSevenZipApplication;
-		private readonly TempFileProvider mTempFileProvider;
+		private readonly SevenZipCommunication.SevenZip mSevenZipApplication;
+		private readonly TempFileProvider               mTempFileProvider;
 
-		private readonly Path             mArchivePath;
-		private bool                      mIsSolid;
+		private readonly Path                           mArchivePath;
+		private bool                                    mIsSolid;
+		 
+		private readonly List<FileEntry>                mOriginalFiles = new List<FileEntry>();
 
-		private readonly List<FileEntry>  mOriginalFiles = new List<FileEntry>();
-
-		private readonly IDictionary<int, IList<Guid>> mSolidBlockFileIdsIndex = new Dictionary<int, IList<Guid>>();
+		private readonly IDictionary<int, IList<Guid>>  mSolidBlockFileIdsIndex = new Dictionary<int, IList<Guid>>();
 
 		public SevenZipArchive(Path archivePath,
 		                       TempFileProvider tempFileProvider)
@@ -53,6 +53,8 @@ namespace FileArchiver.Archive.SevenZip
 			mArchivePath         = archivePath;
 			mSevenZipApplication = new SevenZipCommunication.SevenZip();
 			mTempFileProvider    = tempFileProvider;
+
+			CompressionLevel     = CompressionLevel.Normal;
 		}
 
 		public void ReadEntries(CancellationToken cancelToken)
@@ -125,6 +127,12 @@ namespace FileArchiver.Archive.SevenZip
 				Save(cancelToken, progress);
 			},
 			cancelToken, TaskCreationOptions.LongRunning, TaskScheduler.Default);
+		}
+
+		public CompressionLevel CompressionLevel
+		{
+			get;
+			set;
 		}
 	}
 }

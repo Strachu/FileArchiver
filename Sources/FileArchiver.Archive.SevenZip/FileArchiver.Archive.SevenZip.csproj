@@ -185,6 +185,9 @@
   <ItemGroup>
     <Compile Include="Extraction\SevenZipArchive.Extraction.cs" />
     <Compile Include="Saving\SevenZipArchive.Saving.cs" />
+    <Compile Include="Settings\CompressionLevel.cs" />
+    <Compile Include="Settings\ArchiveSettingsViewModel.cs" />
+    <Compile Include="Settings\ArchiveSettingsViewModelFactory.cs" />
     <Compile Include="SevenZipCommunication\ArchiveInfo.cs" />
     <Compile Include="SevenZipCommunication\ExtractionOperation.cs" />
     <Compile Include="Saving\SavenZipArchive.SavingProgress.cs" />
@@ -221,6 +224,10 @@
     <ProjectReference Include="..\FileArchiver.Core\FileArchiver.Core.csproj">
       <Project>{716f5160-09b4-49ff-8f02-6e7bb23767b7}</Project>
       <Name>FileArchiver.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileArchiver.Presentation\FileArchiver.Presentation.csproj">
+      <Project>{d4cab7c4-2204-412c-ae8b-a639c9abf4f1}</Project>
+      <Name>FileArchiver.Presentation</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

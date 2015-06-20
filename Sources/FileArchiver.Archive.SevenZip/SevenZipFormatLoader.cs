@@ -22,6 +22,7 @@ using System.Diagnostics.Contracts;
 using System.Threading;
 using System.Threading.Tasks;
 
+using FileArchiver.Archive.SevenZip.Settings;
 using FileArchiver.Core.Archive;
 using FileArchiver.Core.Loaders;
 using FileArchiver.Core.Services;
@@ -60,7 +61,13 @@ namespace FileArchiver.Archive.SevenZip
 
 		public IArchive CreateNew(Path destinationPath, object settings)
 		{
-			return new SevenZipArchive(destinationPath, mTempFileProvider);
+			if(settings is CompressionLevel == false)
+				throw new ArgumentException("Settings for new SevenZip archive should be of type CompressionLevel");
+
+			return new SevenZipArchive(destinationPath, mTempFileProvider)
+			{
+				CompressionLevel = (CompressionLevel)settings
+			};
 		}
 
 		public bool IsSupportedArchive(Path path)

@@ -25,6 +25,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
+using FileArchiver.Archive.SevenZip.Settings;
 using FileArchiver.Core.Archive;
 using FileArchiver.Core.Utils.File;
 
@@ -187,10 +188,11 @@ namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 
 		public void AddFilesToArchive(Path archivePath,
 		                              IEnumerable<Path> files,
+		                              CompressionLevel compressionLevel,
 		                              CancellationToken cancelToken,
 		                              IProgress<double> progress)
 		{
-			var commandLineParameters = String.Format("a -t7z \"{0}\"", archivePath);
+			var commandLineParameters = String.Format("a -t7z -mx{0} \"{1}\"", (int)compressionLevel, archivePath);
 
 			UpdateArchive(commandLineParameters, files.Select(x => x.ToString()), cancelToken, progress);
 		}

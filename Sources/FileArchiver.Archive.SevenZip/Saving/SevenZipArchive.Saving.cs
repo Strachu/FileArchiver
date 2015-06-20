@@ -73,7 +73,7 @@ namespace FileArchiver.Archive.SevenZip
 					var rootDirectories  = filesToAdd.Select(GetRootDirectoryName).Distinct();
 					var directoriesToAdd = rootDirectories.Select(dirName => tempDirectoryForFiles.Combine(dirName));
 
-					mSevenZipApplication.AddFilesToArchive(newArchivePath, directoriesToAdd, cancelToken,
+					mSevenZipApplication.AddFilesToArchive(newArchivePath, directoriesToAdd, CompressionLevel, cancelToken,
 					                                       savingProgress.AdditionProgress);
 				}
 
