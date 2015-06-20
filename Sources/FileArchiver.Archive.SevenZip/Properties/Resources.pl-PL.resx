@@ -138,4 +138,7 @@
   <data name="CompressionLevel" xml:space="preserve">
     <value>Stopień kompresji</value>
   </data>
+  <data name="SolidCompression" xml:space="preserve">
+    <value>Zastosuj kompresję ciągłą</value>
+  </data>
 </root>

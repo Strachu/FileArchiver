@@ -34,8 +34,8 @@ namespace FileArchiver.Archive.SevenZip
 {
 	public class SevenZipFormatLoader : IArchiveFormatLoader
 	{
-		private readonly SevenZipCommunication.SevenZip         mSevenZipApplication;
-		private readonly TempFileProvider mTempFileProvider;
+		private readonly SevenZipCommunication.SevenZip mSevenZipApplication;
+		private readonly TempFileProvider               mTempFileProvider;
 
 		public SevenZipFormatLoader(TempFileProvider tempFileProvider)
 		{
@@ -61,12 +61,14 @@ namespace FileArchiver.Archive.SevenZip
 
 		public IArchive CreateNew(Path destinationPath, object settings)
 		{
-			if(settings is CompressionLevel == false)
-				throw new ArgumentException("Settings for new SevenZip archive should be of type CompressionLevel");
+			var sevenZipSettings = settings as ArchiveSettings;
+			if(sevenZipSettings == null)
+				throw new ArgumentException("Settings for new SevenZip archive should be of type ArchiveSettings");
 
 			return new SevenZipArchive(destinationPath, mTempFileProvider)
 			{
-				CompressionLevel = (CompressionLevel)settings
+				CompressionLevel = sevenZipSettings.CompressionLevel,
+				IsSolid          = sevenZipSettings.SolidCompression
 			};
 		}
 

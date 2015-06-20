@@ -138,4 +138,7 @@
   <data name="NormalCompression" xml:space="preserve">
     <value>Normal</value>
   </data>
+  <data name="SolidCompression" xml:space="preserve">
+    <value>Use solid compression</value>
+  </data>
 </root>

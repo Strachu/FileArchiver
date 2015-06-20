@@ -38,8 +38,6 @@ namespace FileArchiver.Archive.SevenZip
 		private readonly TempFileProvider               mTempFileProvider;
 
 		private readonly Path                           mArchivePath;
-		private bool                                    mIsSolid;
-		 
 		private readonly List<FileEntry>                mOriginalFiles = new List<FileEntry>();
 
 		private readonly IDictionary<int, IList<Guid>>  mSolidBlockFileIdsIndex = new Dictionary<int, IList<Guid>>();
@@ -55,13 +53,14 @@ namespace FileArchiver.Archive.SevenZip
 			mTempFileProvider    = tempFileProvider;
 
 			CompressionLevel     = CompressionLevel.Normal;
+			IsSolid              = true;
 		}
 
 		public void ReadEntries(CancellationToken cancelToken)
 		{
 			var archiveInfo = mSevenZipApplication.ReadArchiveInfo(mArchivePath, cancelToken);
 
-			mIsSolid = archiveInfo.Solid;
+			IsSolid = archiveInfo.Solid;
 
 			foreach(var file in archiveInfo.Files)
 			{
@@ -130,6 +129,12 @@ namespace FileArchiver.Archive.SevenZip
 		}
 
 		public CompressionLevel CompressionLevel
+		{
+			get;
+			set;
+		}
+
+		public bool IsSolid
 		{
 			get;
 			set;

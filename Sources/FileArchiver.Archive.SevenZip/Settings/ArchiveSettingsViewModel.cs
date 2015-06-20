@@ -48,6 +48,13 @@ namespace FileArchiver.Archive.SevenZip.Settings
 			set { base.SetFieldWithNotification(ref _mCompressionLevel, value); }
 		}
 
+		private bool _mSolidCompression = true;
+		public bool SolidCompression
+		{
+			get { return _mSolidCompression; }
+			set { base.SetFieldWithNotification(ref _mSolidCompression, value); }
+		}
+
 		public IEnumerable<ISettingsControl> SettingControls
 		{
 			get
@@ -55,13 +62,18 @@ namespace FileArchiver.Archive.SevenZip.Settings
 				return new ISettingsControl[]
 				{
 					mControlsFactory.CreateChoiceBox(Lang.CompressionLevel, () => CompressionLevel),
+					mControlsFactory.CreateCheckBox(Lang.SolidCompression,  () => SolidCompression)
 				};
 			}
 		}
 
 		public object ToArchiveSettings()
 		{
-			return CompressionLevel;
+			return new ArchiveSettings
+			{
+				CompressionLevel = CompressionLevel,
+				SolidCompression = SolidCompression
+			};
 		}
 	}
 }

@@ -122,5 +122,14 @@ namespace FileArchiver.Archive.SevenZip.Properties {
                 return ResourceManager.GetString("NormalCompression", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use solid compression.
+        /// </summary>
+        internal static string SolidCompression {
+            get {
+                return ResourceManager.GetString("SolidCompression", resourceCulture);
+            }
+        }
     }
 }

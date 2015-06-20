@@ -189,10 +189,14 @@ namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 		public void AddFilesToArchive(Path archivePath,
 		                              IEnumerable<Path> files,
 		                              CompressionLevel compressionLevel,
+		                              bool useSolidCompression,
 		                              CancellationToken cancelToken,
 		                              IProgress<double> progress)
 		{
-			var commandLineParameters = String.Format("a -t7z -mx{0} \"{1}\"", (int)compressionLevel, archivePath);
+			var solidModeSwitch        = String.Format("-ms={0}", (useSolidCompression) ? "on" : "off");
+			var compressionLevelSwitch = String.Format("-mx{0}",  (int)compressionLevel);
+			var commandLineParameters  = String.Format("a -t7z {0} {1} \"{2}\"", compressionLevelSwitch, solidModeSwitch,
+			                                                                     archivePath);
 
 			UpdateArchive(commandLineParameters, files.Select(x => x.ToString()), cancelToken, progress);
 		}
