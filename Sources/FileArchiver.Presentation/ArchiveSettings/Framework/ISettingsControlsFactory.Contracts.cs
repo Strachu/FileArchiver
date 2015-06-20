@@ -61,6 +61,17 @@ namespace FileArchiver.Presentation.ArchiveSettings.Framework
 			throw new NotImplementedException();
 		}
 
+		public ISettingsControl CreateCheckBox(string title,
+		                                       Expression<Func<bool>> valueProperty,
+		                                       Expression<Func<bool>> enabledProperty = null,
+		                                       Expression<Func<bool>> visibleProperty = null)
+		{
+			Contract.Requires(!String.IsNullOrWhiteSpace(title));
+			Contract.Requires(valueProperty != null);
+
+			throw new NotImplementedException();
+		}
+
 		ISettingsControl ISettingsControlsFactory.CreateDestinationPathBrowser<TValue>(string title,
 			Expression<Func<TValue>> valueProperty,
 			Expression<Func<bool>> enabledProperty,

@@ -35,33 +35,41 @@ namespace FileArchiver.Presentation.ArchiveSettings.Framework.Windows.Forms
 
 		public ISettingsControl CreateTextField<TValue>(string title,
 		                                                Expression<Func<TValue>> valueProperty,
-																		Expression<Func<bool>> enabledProperty,
-																		Expression<Func<bool>> visibleProperty)
+		                                                Expression<Func<bool>> enabledProperty,
+		                                                Expression<Func<bool>> visibleProperty)
 		{
 			return new TextField<TValue>(title, valueProperty, enabledProperty, visibleProperty);
 		}
 
 		public ISettingsControl CreateChoiceBox<TValue>(string title,
 		                                                Expression<Func<TValue>> valueProperty,
-																		Expression<Func<IEnumerable<TValue>>> availableValuesProperty,
-																		Expression<Func<bool>> enabledProperty,
-																		Expression<Func<bool>> visibleProperty)
+		                                                Expression<Func<IEnumerable<TValue>>> availableValuesProperty,
+		                                                Expression<Func<bool>> enabledProperty,
+		                                                Expression<Func<bool>> visibleProperty)
 		{
 			return new ChoiceBox<TValue>(title, valueProperty, availableValuesProperty, enabledProperty, visibleProperty);
 		}
 
+		public ISettingsControl CreateCheckBox(string title,
+		                                       Expression<Func<bool>> valueProperty,
+		                                       Expression<Func<bool>> enabledProperty,
+		                                       Expression<Func<bool>> visibleProperty)
+		{
+			return new CheckBox(title, valueProperty, enabledProperty, visibleProperty);
+		}
+
 		public ISettingsControl CreateDestinationPathBrowser<TValue>(string title,
 		                                                             Expression<Func<TValue>> controlsProperty,
-																						 Expression<Func<bool>> enabledProperty,
-																						 Expression<Func<bool>> visibleProperty)
+		                                                             Expression<Func<bool>> enabledProperty,
+		                                                             Expression<Func<bool>> visibleProperty)
 		{
 			return new DestinationPathBrowser<TValue>(title, controlsProperty, enabledProperty, visibleProperty);
 		}
 
 		public ISettingsControl CreateSourcePathBrowser<TValue>(string title,
 		                                                        Expression<Func<TValue>> controlsProperty,
-																				  Expression<Func<bool>> enabledProperty,
-																				  Expression<Func<bool>> visibleProperty)
+		                                                        Expression<Func<bool>> enabledProperty,
+		                                                        Expression<Func<bool>> visibleProperty)
 		{
 			return new SourcePathBrowser<TValue>(title, controlsProperty, enabledProperty, visibleProperty);
 		}

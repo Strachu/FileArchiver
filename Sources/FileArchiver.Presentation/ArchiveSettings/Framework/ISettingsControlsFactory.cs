@@ -108,6 +108,28 @@ namespace FileArchiver.Presentation.ArchiveSettings.Framework
 		                                         Expression<Func<bool>> visibleProperty = null);
 
 		/// <summary>
+		/// Creates a check box.
+		/// </summary>
+		/// <param name="title">
+		/// The title of setting represented by this control.
+		/// </param>
+		/// <param name="valueProperty">
+		/// An expression in the form of <c>() => obj.Property</c> with a property to be bound as the actual value of the settings.
+		/// </param>
+		/// <param name="enabledProperty">
+		/// An expression in the form of <c>() => obj.Property</c> with a property controlling whether the control is enabled,
+		/// that is, whether it's value can be changed by a user. If not specified, the control is always enabled.
+		/// </param>
+		/// <param name="visibleProperty">
+		/// An expression in the form of <c>() => obj.Property</c> with a property controlling the visibility of the group.
+		/// If not specified, the control is always visible.
+		/// </param>
+		ISettingsControl CreateCheckBox(string title,
+		                                Expression<Func<bool>> valueProperty,
+		                                Expression<Func<bool>> enabledProperty = null,
+		                                Expression<Func<bool>> visibleProperty = null);
+
+		/// <summary>
 		/// Creates a control giving the user a possibility to browse for or enter a destination path.
 		/// </summary>
 		/// <typeparam name="TValue">
