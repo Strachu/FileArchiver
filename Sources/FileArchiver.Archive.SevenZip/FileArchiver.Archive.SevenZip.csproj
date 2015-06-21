@@ -190,6 +190,7 @@
     <Compile Include="Settings\ArchiveSettingsViewModelFactory.cs" />
     <Compile Include="Settings\ArchiveSettings.cs" />
     <Compile Include="SevenZipCommunication\ArchiveInfo.cs" />
+    <Compile Include="SevenZipCommunication\CompressionLevelParser.cs" />
     <Compile Include="SevenZipCommunication\ExtractionOperation.cs" />
     <Compile Include="Saving\SavenZipArchive.SavingProgress.cs" />
     <Compile Include="SevenZipCommunication\SevenZipProcess.cs" />

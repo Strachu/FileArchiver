@@ -60,7 +60,8 @@ namespace FileArchiver.Archive.SevenZip
 		{
 			var archiveInfo = mSevenZipApplication.ReadArchiveInfo(mArchivePath, cancelToken);
 
-			IsSolid = archiveInfo.Solid;
+			CompressionLevel = archiveInfo.CompressionLevel;
+			IsSolid          = archiveInfo.Solid;
 
 			foreach(var file in archiveInfo.Files)
 			{

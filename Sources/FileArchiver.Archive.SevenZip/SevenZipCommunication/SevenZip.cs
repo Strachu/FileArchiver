@@ -69,21 +69,24 @@ namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 			using(var process = SevenZipProcess.Execute(String.Format("l -slt -t7z \"{0}\"", archivePath)))
 			{
 				var fileListReader = new FileListingReader(process.StandardOutput);
+				
+				var archiveInfo      = fileListReader.ReadArchiveProperties();
+				var archiveEntries   = fileListReader.ReadEntries().ToList();
 
-				var archiveInfo    = fileListReader.ReadArchiveProperties();
+				var isSolid          = (archiveInfo["Solid"] == "+");
+				var compressionLevel = CompressionLevelParser.ParseFromEntryList(archiveEntries);
+				var files            = ParseEntries(archiveEntries, cancelToken);
 
-				var isSolid        = (archiveInfo["Solid"] == "+");
-				var files          = ReadEntries(fileListReader, cancelToken);
-
-				return new ArchiveInfo(files, isSolid);
+				return new ArchiveInfo(files, compressionLevel, isSolid);
 			}
 		}
 
-		private IEnumerable<FileEntry> ReadEntries(FileListingReader reader, CancellationToken cancelToken)
+		private IEnumerable<FileEntry> ParseEntries(IEnumerable<IDictionary<string, string>> entries,
+		                                            CancellationToken cancelToken)
 		{
 			var hierarchyBuilder = new FileEntryHierarchyBuilder();
 
-			foreach(var entryProperties in reader.ReadEntries())
+			foreach(var entryProperties in entries)
 			{
 				cancelToken.ThrowIfCancellationRequested();
 
