@@ -112,5 +112,41 @@ Block =
 			Assert.That(entryProperties["Method"],      Is.EqualTo(String.Empty));
 			Assert.That(entryProperties["Block"],       Is.EqualTo(String.Empty));
 		}
+
+		[Test]
+		public void ParseEntryWithEqualSignInName()
+		{
+			var reader = new FileListingReader(new StringReader(
+@"
+7-Zip (A) 9.20  Copyright (c) 1999-2010 Igor Pavlov  2010-11-18
+
+Listing archive: Test.7z
+
+--
+Path = Test.7z
+Type = 7z
+Method = LZMA
+Solid = +
+Blocks = 2
+Physical Size = 481
+Headers Size = 230
+
+----------
+Path = NameWithEqual=Sign.txt
+Size = 15
+Packed Size = 25
+Modified = 2014-12-12 18:53:04
+Attributes = ....A
+CRC = 346D5F73
+Encrypted = -
+Method = LZMA:16
+Block = 0
+
+"));
+
+			var entryProperties = reader.ReadEntries().First();
+
+			Assert.That(entryProperties["Path"], Is.EqualTo("NameWithEqual=Sign.txt"));
+		}
 	}
 }

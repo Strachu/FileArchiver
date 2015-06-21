@@ -23,6 +23,8 @@ using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
 
+using FileArchiver.Core.Utils;
+
 namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 {
 	/// <summary>
@@ -170,9 +172,9 @@ namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 
 		private void ParseLine(string line, IDictionary<string, string> result)
 		{
-			var keyValueArray = line.Split('=');
+			var keyValueArray = line.Split('='.ToSingleElementList().ToArray(), count: 2);
 
-			if(keyValueArray.Length != 2)
+			if(keyValueArray.Length < 2)
 				throw new FormatException("Invalid format of an file listing. Has the format changed?");
 
 			var key   = keyValueArray[0].Trim();
