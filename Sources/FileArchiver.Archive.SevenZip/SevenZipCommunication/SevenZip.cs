@@ -92,7 +92,23 @@ namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 				hierarchyBuilder.AddFile(destinationPath, file);
 			}
 
-			return hierarchyBuilder.Build();
+			return hierarchyBuilder.Build().Select(AddSevenZipEntryDataIfDoesNotExist);
+		}
+
+		/// <summary>
+		/// Adds an empty seven zip data to the entry if it does not exist.
+		/// </summary>
+		/// <remarks>
+		/// This is needed when there is no information about directories in the archive.
+		/// </remarks>
+		private FileEntry AddSevenZipEntryDataIfDoesNotExist(FileEntry original)
+		{
+			var entryData = new SevenZipEntryData(original.Path, solidBlockIndex: null);
+
+			return original.BuildCopy()
+			               .WithArchiveData(original.ArchiveData ?? entryData)
+			               .WithFiles(original.Files.Select(AddSevenZipEntryDataIfDoesNotExist).ToArray())
+			               .Build();
 		}
 
 		public void ExtractFromArchive(Path archivePath,
