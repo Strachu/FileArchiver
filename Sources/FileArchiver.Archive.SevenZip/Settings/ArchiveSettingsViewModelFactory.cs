@@ -17,42 +17,37 @@
 */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-using FileArchiver.Archive.SevenZip.Settings;
-using FileArchiver.Core.Archive;
+using FileArchiver.Presentation.ArchiveSettings;
+using FileArchiver.Presentation.ArchiveSettings.Framework;
 
-namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
+namespace FileArchiver.Archive.SevenZip.Settings
 {
-	internal class ArchiveInfo
+	internal class ArchiveSettingsViewModelFactory : IArchiveSettingsViewModelFactory
 	{
-		public ArchiveInfo(IEnumerable<FileEntry> files, CompressionLevel compressionLevel, bool solid)
-		{
-			Contract.Requires(files != null);
-			Contract.Requires(Contract.ForAll(files, file => file != null));
+		private readonly ISettingsControlsFactory mControlsFactory;
 
-			Files            = files;
-			CompressionLevel = compressionLevel;
-			Solid            = solid;
+		public ArchiveSettingsViewModelFactory(ISettingsControlsFactory controlsFactory)
+		{
+			Contract.Requires(controlsFactory != null);
+
+			mControlsFactory = controlsFactory;
 		}
 
-		public IEnumerable<FileEntry> Files
+		public IArchiveSettingsViewModel CreateSettingsViewModel()
 		{
-			get;
-			private set;
+			return new ArchiveSettingsViewModel(mControlsFactory);
 		}
 
-		public CompressionLevel CompressionLevel
+		public string ArchiveExtension
 		{
-			get;
-			private set;
-		}
-
-		public bool Solid
-		{
-			get;
-			private set;
+			get { return ".7z"; }
 		}
 	}
 }

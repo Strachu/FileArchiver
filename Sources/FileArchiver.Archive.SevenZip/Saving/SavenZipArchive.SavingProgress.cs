@@ -77,7 +77,7 @@ namespace FileArchiver.Archive.SevenZip
 				{
 					mRemovalCost = bytesInArchive - bytesToDelete;
 
-					if(mArchive.mIsSolid)
+					if(mArchive.IsSolid)
 					{
 						var filesToRemoveFlattenedList = filesToRemove.Flatten().Where(x => !x.IsDirectory).ToList();
 						var bytesInModifiedSolidBlocks = mArchive.GetAllFilesInSolidBlocksOf(filesToRemoveFlattenedList)

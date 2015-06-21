@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -119,5 +119,26 @@
   </resheader>
   <data name="ArchiveDescription" xml:space="preserve">
     <value>Archiwum 7-zip</value>
+  </data>
+  <data name="BestCompression" xml:space="preserve">
+    <value>Najlepsza</value>
+  </data>
+  <data name="FastestCompression" xml:space="preserve">
+    <value>Najszybsza</value>
+  </data>
+  <data name="GoodCompression" xml:space="preserve">
+    <value>Dobra</value>
+  </data>
+  <data name="NormalCompression" xml:space="preserve">
+    <value>Normalna</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>Bez kompresji</value>
+  </data>
+  <data name="CompressionLevel" xml:space="preserve">
+    <value>Stopień kompresji</value>
+  </data>
+  <data name="SolidCompression" xml:space="preserve">
+    <value>Zastosuj kompresję ciągłą</value>
   </data>
 </root>

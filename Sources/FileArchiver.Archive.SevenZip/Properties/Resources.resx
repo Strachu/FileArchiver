@@ -120,4 +120,25 @@
   <data name="ArchiveDescription" xml:space="preserve">
     <value>7-zip archive</value>
   </data>
+  <data name="BestCompression" xml:space="preserve">
+    <value>Best</value>
+  </data>
+  <data name="CompressionLevel" xml:space="preserve">
+    <value>Compression level</value>
+  </data>
+  <data name="FastestCompression" xml:space="preserve">
+    <value>Fastest</value>
+  </data>
+  <data name="GoodCompression" xml:space="preserve">
+    <value>Good</value>
+  </data>
+  <data name="NoCompression" xml:space="preserve">
+    <value>Without compression</value>
+  </data>
+  <data name="NormalCompression" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="SolidCompression" xml:space="preserve">
+    <value>Use solid compression</value>
+  </data>
 </root>

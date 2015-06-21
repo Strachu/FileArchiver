@@ -16,43 +16,45 @@
  * If not, see <http://www.gnu.org/licenses/>.
 */
 #endregion
-
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 using FileArchiver.Archive.SevenZip.Settings;
-using FileArchiver.Core.Archive;
 
 namespace FileArchiver.Archive.SevenZip.SevenZipCommunication
 {
-	internal class ArchiveInfo
+	internal class CompressionLevelParser
 	{
-		public ArchiveInfo(IEnumerable<FileEntry> files, CompressionLevel compressionLevel, bool solid)
+		public static CompressionLevel ParseFromEntryList(IEnumerable<IDictionary<string, string>> entries)
 		{
-			Contract.Requires(files != null);
-			Contract.Requires(Contract.ForAll(files, file => file != null));
+			Contract.Requires(entries != null);
 
-			Files            = files;
-			CompressionLevel = compressionLevel;
-			Solid            = solid;
-		}
+			var firstEntry = entries.FirstOrDefault();
+			if(firstEntry == null)
+				return CompressionLevel.Normal;
 
-		public IEnumerable<FileEntry> Files
-		{
-			get;
-			private set;
-		}
+			var compressionMethod = firstEntry["Method"];
 
-		public CompressionLevel CompressionLevel
-		{
-			get;
-			private set;
-		}
+			if(compressionMethod.Contains("Copy"))
+				return CompressionLevel.NoCompression;
 
-		public bool Solid
-		{
-			get;
-			private set;
+			if(compressionMethod.Contains("LZMA:26"))
+				return CompressionLevel.Best;
+
+			if(compressionMethod.Contains("LZMA:25"))
+				return CompressionLevel.Good;
+
+			if(compressionMethod.Contains("LZMA:24"))
+				return CompressionLevel.Normal;
+
+			if(compressionMethod.Contains("LZMA:16"))
+				return CompressionLevel.Fastest;
+
+			return CompressionLevel.Normal;
 		}
 	}
 }

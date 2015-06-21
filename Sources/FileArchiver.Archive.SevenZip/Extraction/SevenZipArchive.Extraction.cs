@@ -58,7 +58,7 @@ namespace FileArchiver.Archive.SevenZip
 		{
 			long bytesToExtract = filesToExtract.Sum(file => file.Size);
 
-			if(mIsSolid)
+			if(IsSolid)
 			{
 				var filesNotOnDiskYet       = GetFilesNotOnDiskYet(filesToExtract).ToList();
 				var linkedFiles             = GetAllFilesInSolidBlocksOf(filesNotOnDiskYet).ToList();
@@ -90,7 +90,7 @@ namespace FileArchiver.Archive.SevenZip
 			if(!filesToExtract.Any())
 				return;
 
-			if(!mIsSolid)
+			if(!IsSolid)
 			{
 				var fileDestinationPairs = filesToExtract.Select(fileToExtract => new FileDestinationPair
 				(
