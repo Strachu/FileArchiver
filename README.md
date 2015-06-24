@@ -59,6 +59,6 @@ During the creation of the application the following tools were used:
 - [SlimTune profiler](https://code.google.com/p/slimtune/)
 
 # License
-FileArchiver is a free software distributed under the GNU GPL 3 or later license.
+FileArchiver is a free software distributed under the GNU LGPL 3 or later license.
 
 See LICENSE.txt and LICENSE_THIRD_PARTY.txt for more information.
