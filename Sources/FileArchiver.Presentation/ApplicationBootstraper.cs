@@ -30,6 +30,7 @@ using System.Linq;
 using System.Reflection;
 
 using FileArchiver.Core;
+using FileArchiver.Core.Archive;
 using FileArchiver.Core.Loaders;
 using FileArchiver.Core.Services;
 using FileArchiver.Presentation.ArchiveSettings;
@@ -38,6 +39,7 @@ using FileArchiver.Presentation.Commands.CommandSystem;
 using FileArchiver.Presentation.FileListView;
 using FileArchiver.Presentation.OtherViews;
 using FileArchiver.Presentation.Settings;
+using FileArchiver.Presentation.Shell;
 
 namespace FileArchiver.Presentation
 {
@@ -103,9 +105,20 @@ namespace FileArchiver.Presentation
 		{
 			return new AggregateCatalog
 			(
-				new AssemblyCatalog(Assembly.GetExecutingAssembly(),           ConfigureExportsForEveryTypeInApplication()),
+				CreateCoreAssemblyCatalog(),
+				CreatePresentationAssemblyCatalog(),
 				new AssemblyCatalog(Assembly.GetAssembly(typeof(IFileSystem)), ConfigureExportsForEveryTypeInApplication())
 			);
+		}
+
+		private static ComposablePartCatalog CreateCoreAssemblyCatalog()
+		{
+			return new AssemblyCatalog(Assembly.GetAssembly(typeof(IArchive)), ConfigureExportsForEveryTypeInApplication());
+		}
+
+		private static ComposablePartCatalog CreatePresentationAssemblyCatalog()
+		{
+			return new AssemblyCatalog(Assembly.GetAssembly(typeof(IMainView)), ConfigureExportsForEveryTypeInApplication());
 		}
 
 		private static RegistrationBuilder ConfigureExportsForPlugins()
