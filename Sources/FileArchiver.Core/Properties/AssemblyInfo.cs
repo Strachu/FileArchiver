@@ -29,7 +29,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("FileArchiver")]
-[assembly: AssemblyCopyright("Copyright © 2015")]
+[assembly: AssemblyCopyright("Copyright © 2015 Patryk Strach")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

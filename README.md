@@ -57,6 +57,8 @@ During the creation of the application the following tools were used:
 - [Subversion](https://subversion.apache.org/) (before the migration to GitHub)
 - [TortoiseSVN](http://tortoisesvn.net/) (before the migration to GitHub)
 - [SlimTune profiler](https://code.google.com/p/slimtune/)
+- [InnoSetup](http://www.jrsoftware.org/isinfo.php)
+- [Inno Script Studio](https://www.kymoto.org/products/inno-script-studio)
 
 # License
 FileArchiver is a free software distributed under the GNU LGPL 3 or later license.

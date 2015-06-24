@@ -2,6 +2,7 @@
 /Documentation/obj
 /Documentation/Output
 /packages
+/Installers/FileArchiver Setup.exe
 /Sources/FileArchiver.Archive.GZip/obj
 /Sources/FileArchiver.Archive.SevenZip/obj
 /Sources/FileArchiver.Archive.Tar/obj

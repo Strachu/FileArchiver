@@ -10,8 +10,8 @@ VersionInfoProductName=FileArchiver
 AppPublisher=Patryk Strach
 VersionInfoCompany=Patryk Strach
 VersionInfoCopyright=Patryk Strach
-AppVersion=1.0.0
-VersionInfoVersion=1.0.0
+AppVersion=0.1.0
+VersionInfoVersion=0.1.0
 AppId={{5EFF25B8-5075-4A8F-8804-779363C2DFB1}
 SourceDir=..\
 OutputDir=Installers\
@@ -29,8 +29,12 @@ AlwaysShowDirOnReadyPage=True
 AllowRootDirectory=True
 
 [Files]
-Source: "Binaries\Release\ContextMenuService.exe"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete; Components: ContextMenuIntegration
+Source: "Binaries\Release\FileArchiver.Core.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete
 Source: "Binaries\Release\FileArchiver.exe"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete
+Source: "Binaries\Release\System.IO.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete;
+Source: "Binaries\Release\pl-PL\*"; DestDir: "{app}\pl-PL"; Flags: ignoreversion restartreplace uninsrestartdelete
+
+Source: "Binaries\Release\FileArchiver.ContextMenu.exe"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete; Components: ContextMenuIntegration
 Source: "Binaries\Release\Liferay.Nativity.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete; Components: ContextMenuIntegration
 Source: "Binaries\Release\LiferayNativityContextMenus_x64.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete 64bit regserver; Components: ContextMenuIntegration; Check: Is64BitInstallMode
 Source: "Binaries\Release\LiferayNativityContextMenus_x86.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete 32bit regserver; Components: ContextMenuIntegration; Check: not Is64BitInstallMode
@@ -38,14 +42,14 @@ Source: "Binaries\Release\LiferayNativityUtil_x64.dll"; DestDir: "{app}"; Flags:
 Source: "Binaries\Release\LiferayNativityUtil_x86.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete; Components: ContextMenuIntegration; Check: not Is64BitInstallMode
 Source: "Binaries\Release\log4net.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete; Components: ContextMenuIntegration
 Source: "Binaries\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete; Components: ContextMenuIntegration
-Source: "Binaries\Release\SharpCompress.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete
-Source: "Binaries\Release\System.IO.Abstractions.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete
+
+Source: "Binaries\Release\Plugins\*"; Excludes: "*.pdb,FileArchiver.Core.*,FileArchiver.exe,FileArchiver.pdb"; DestDir: "{app}\Plugins"; Flags: ignoreversion restartreplace uninsrestartdelete recursesubdirs
 
 [Components]
 Name: "ContextMenuIntegration"; Description: "{cm:ContextMenuIntegrationComponent}"; Types: full custom compact
 
 [CustomMessages]
-english.ContextMenuIntegrationComponent=Integration with explorer's context menu
+english.ContextMenuIntegrationComponent=Integration with the context menu of File Explorer
 polish.ContextMenuIntegrationComponent=Integracja z menu kontekstowym eksplorera
 english.CreateFileAssocations=Associate the application with supported files
 polish.CreateFileAssocations=Skojarz aplikacjê z obs³ugiwanymi plikami
@@ -65,10 +69,11 @@ Name: "{group}\{cm:UninstallProgram, FileArchiver}"; Filename: "{uninstallexe}"
 
 [Run]
 Filename: "{app}\FileArchiver.exe"; Flags: nowait postinstall skipifsilent unchecked; Description: "{cm:LaunchProgram,FileArchiver}"
-Filename: "{app}\ContextMenuService.exe"; Flags: nowait runasoriginaluser; Components: ContextMenuIntegration
+Filename: "{app}\FileArchiver.ContextMenu.exe"; Flags: nowait runasoriginaluser; Components: ContextMenuIntegration
 
 [Registry]
-Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "FileArchiverContextMenu"; ValueData: "{app}\ContextMenuService.exe"; Flags: uninsdeletevalue; Components: ContextMenuIntegration
+Root: "HKLM"; Subkey: "SOFTWARE\Microsoft\Windows\CurrentVersion\Run"; ValueType: string; ValueName: "FileArchiverContextMenu"; ValueData: "{app}\FileArchiver.ContextMenu.exe"; Flags: uninsdeletevalue; Components: ContextMenuIntegration
+Root: "HKCR"; Subkey: ".7z"; ValueType: string; ValueData: "FileArchiver"; Flags: uninsdeletevalue; Tasks: FileAssocations
 Root: "HKCR"; Subkey: ".zip"; ValueType: string; ValueData: "FileArchiver"; Flags: uninsdeletevalue; Tasks: FileAssocations
 Root: "HKCR"; Subkey: ".tar"; ValueType: string; ValueData: "FileArchiver"; Flags: uninsdeletevalue; Tasks: FileAssocations
 Root: "HKCR"; Subkey: ".gz"; ValueType: string; ValueData: "FileArchiver"; Flags: uninsdeletevalue; Tasks: FileAssocations
