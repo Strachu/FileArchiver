@@ -3,7 +3,8 @@
 <img src="https://raw.githubusercontent.com/wiki/Strachu/FileArchiver/Screenshots/Main%20window.png"/><br/>
 <a href="https://github.com/Strachu/FileArchiver/wiki/Screenshots">More screenshots</a>
 </p>
-**FileArchiver** is an application for creating, manipulating and extracting of file archives such as ZIP and 7Z files.
+**FileArchiver** is an application for a creation, manipulation and extraction of file archives such as ZIP and 7Z files.
+
 The main distinct feature of FileArchiver is that it is optimized for batched manipulation of archives.
 While other applications do operations on an archive immediately, FileArchiver does all operations in memory and applies them
 after a user chooses the save operation. In this way, during multiple operations the archive is rewritten only once for all
