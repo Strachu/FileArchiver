@@ -31,6 +31,11 @@ namespace FileArchiver.Core.Archive
 	/// </summary>
 	public class NullArchive : IArchive
 	{
+		public bool SupportsMultipleFiles
+		{
+			get { return false; }
+		}
+
 		public void AddFile(Path destinationDirectoryPath, FileEntry newFile)
 		{
 		}

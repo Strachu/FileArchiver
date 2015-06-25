@@ -76,6 +76,11 @@ namespace FileArchiver.Core.Archive
 			await mParentArchive.SaveAsync(cancelToken, progress);
 		}
 
+		public bool SupportsMultipleFiles
+		{
+			get { return mEmbeddedArchive.SupportsMultipleFiles; }
+		}
+
 		public void AddFile(Path destinationDirectoryPath, FileEntry newFile)
 		{
 			mEmbeddedArchive.AddFile(destinationDirectoryPath, newFile);

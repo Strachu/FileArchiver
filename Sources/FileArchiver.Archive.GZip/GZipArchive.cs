@@ -54,6 +54,11 @@ namespace FileArchiver.Archive.GZip
 			mTempFileProvider = tempFileProvider;
 		}
 
+		public override bool SupportsMultipleFiles
+		{
+			get { return false; }
+		}
+
 		public override void AddFile(Path destinationDirectoryPath, FileEntry newFile)
 		{
 			if(RootFiles.Any() || newFile.Files.Any())
@@ -112,9 +117,9 @@ namespace FileArchiver.Archive.GZip
 			{
 				if(file.DataFilePath == null && !File.Exists(mTempFileProvider.GetTempFileFor(file)))
 				{
-					// SharpCompress does not rewind the GZip stream, so it the file can be extracted only once.
+					// SharpCompress does not rewind the GZip stream, so the file can be extracted only once.
 					// Reload the archive to enable future extractions.
-					// It is done in finally block because it has to be even after canceling or error.
+					// It is done in finally block because it has to be done even after a cancellation or error.
 					base.ReloadArchive();
 				}
 			}

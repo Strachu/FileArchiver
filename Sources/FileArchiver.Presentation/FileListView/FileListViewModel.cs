@@ -176,13 +176,12 @@ namespace FileArchiver.Presentation.FileListView
 		{
 			try
 			{
-				var oldFileList = FilesInCurrentDirectory.ToList();
-
+				var oldFileList    = FilesInCurrentDirectory.ToList();
 				var errorPresenter = mFileAddingErrorHandlerFactory.GetErrorPresenterForNextOperation(Archive);
 
 				mFileAddingService.AddFiles(Archive, CurrentDirectory, files, errorPresenter.ExceptionThrown);
 
-				var addedFiles = FilesInCurrentDirectory.Except(oldFileList).ToList();
+				var addedFiles     = FilesInCurrentDirectory.Except(oldFileList).ToList();
 
 				if(addedFiles.Any())
 				{
@@ -190,6 +189,10 @@ namespace FileArchiver.Presentation.FileListView
 
 					ScrollTo(FilesInCurrentDirectory.First(addedFiles.Contains));
 				}
+			}
+			catch(InvalidOperationException e)
+			{
+				ErrorOccured.SafeRaise(this, new ErrorEventArgs(e.Message));
 			}
 			catch(OperationCanceledException)
 			{
@@ -271,5 +274,6 @@ namespace FileArchiver.Presentation.FileListView
 		}
 
 		public event EventHandler<FileOpenRequestEventArgs> FileOpeningRequested;
+		public event EventHandler<ErrorEventArgs>           ErrorOccured;
 	}
 }

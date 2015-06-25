@@ -144,5 +144,11 @@ namespace FileArchiver.Presentation.FileListView
 			add { throw new NotImplementedException(); }
 			remove { throw new NotImplementedException(); }
 		}
+
+		event EventHandler<ErrorEventArgs> IFileListViewModel.ErrorOccured
+		{
+			add { throw new NotImplementedException(); }
+			remove { throw new NotImplementedException(); }
+		}
 	}
 }

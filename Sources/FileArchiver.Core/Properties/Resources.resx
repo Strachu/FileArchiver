@@ -121,31 +121,7 @@
   <data name="ApplicationIcon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\..\..\Resources\Icons\App.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Icon_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\Add.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_Directory" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\Folder.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_Extract" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\Extract.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_File" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\File.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_MoveUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\MoveUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_New" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\New.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_Open" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\Open.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_Remove" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\Remove.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Icon_Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\..\..\Resources\Icons\Save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="ArchiveCannotContainMultipleFiles" xml:space="preserve">
+    <value>The archive in current format cannot contain multiple files.</value>
   </data>
 </root>

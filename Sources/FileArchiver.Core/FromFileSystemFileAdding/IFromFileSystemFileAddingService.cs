@@ -66,6 +66,10 @@ namespace FileArchiver.Core
 		/// <exception cref="UnauthorizedAccessException">
 		/// A user does not have permission to access some file.
 		/// </exception>
+		/// <exception cref="InvalidOperationException">
+		/// The archive does not support multiple files and the method has been called with multiple files or
+		/// the archive already has some file.
+		/// </exception>
 		/// <exception cref="OperationCanceledException">
 		/// RetryAction.Abort has been returned from errorHandler.
 		/// </exception>

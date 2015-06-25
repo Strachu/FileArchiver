@@ -94,5 +94,6 @@ namespace FileArchiver.Presentation.FileListView
 		void AddFiles(IReadOnlyList<Path> files);
 
 		event EventHandler<FileOpenRequestEventArgs> FileOpeningRequested;
+		event EventHandler<ErrorEventArgs>           ErrorOccured;
 	}
 }

@@ -24,6 +24,7 @@ using System.ComponentModel;
 using FileArchiver.Core;
 using FileArchiver.Core.Archive;
 using FileArchiver.Core.ValueTypes;
+using FileArchiver.Presentation.OtherViews;
 using FileArchiver.Presentation.Utils.Windows.Forms;
 
 namespace FileArchiver.Presentation.FileListView.Windows.Forms
@@ -37,7 +38,7 @@ namespace FileArchiver.Presentation.FileListView.Windows.Forms
 		{
 			if(this.IsInDesignMode())
 			{
-				base.ActivePanel = new FileListPanel(new DesignTimeFileListViewModel());
+				base.ActivePanel = new FileListPanel(new DesignTimeFileListViewModel(), new DialogLauncher());
 			}
 		}
 
@@ -141,6 +142,7 @@ namespace FileArchiver.Presentation.FileListView.Windows.Forms
 		#pragma warning disable 67
 			public event EventHandler<FileOpenRequestEventArgs> FileOpeningRequested;
 			public event PropertyChangedEventHandler            PropertyChanged;
+			public event EventHandler<ErrorEventArgs>           ErrorOccured;
 		#pragma warning restore 67
 		}
 	}

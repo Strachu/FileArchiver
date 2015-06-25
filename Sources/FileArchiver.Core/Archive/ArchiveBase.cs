@@ -42,6 +42,11 @@ namespace FileArchiver.Core.Archive
 		private readonly Dictionary<Path, FileEntry> mPathFileIndex    = new Dictionary<Path, FileEntry>(capacity: 100000);
 		private readonly Dictionary<Guid, FileEntry> mIdFileIndex      = new Dictionary<Guid, FileEntry>(capacity: 100000);
 
+		public virtual bool SupportsMultipleFiles
+		{
+			get { return true; }
+		}
+
 		public virtual void AddFile(Path destinationDirectoryPath, FileEntry newFile)
 		{
 			if(destinationDirectoryPath.Equals(Path.Root))

@@ -32,6 +32,14 @@ namespace FileArchiver.Core.Archive
 	public interface IArchive : IDisposable
 	{
 		/// <summary>
+		/// Indicates whether this archive supports containing more than one file.
+		/// </summary>
+		bool SupportsMultipleFiles
+		{
+			get;
+		}
+
+		/// <summary>
 		/// Adds a file under specified directory.
 		/// </summary>
 		/// <param name="destinationDirectoryPath">

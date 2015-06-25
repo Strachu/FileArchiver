@@ -32,6 +32,11 @@ namespace FileArchiver.Core.Archive
 	[ContractClassFor(typeof(IArchive))]
 	internal abstract class IArchiveContractClass : IArchive
 	{
+		bool IArchive.SupportsMultipleFiles
+		{
+			get { throw new NotImplementedException(); }
+		}
+
 		void IArchive.AddFile(Path destinationDirectoryPath, FileEntry newFile)
 		{
 			Contract.Requires(destinationDirectoryPath != null);

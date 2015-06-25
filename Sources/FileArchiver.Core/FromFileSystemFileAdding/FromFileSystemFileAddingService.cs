@@ -28,6 +28,9 @@ using System.Threading.Tasks;
 using FileArchiver.Core.Archive;
 using FileArchiver.Core.DirectoryTraversing;
 using FileArchiver.Core.ValueTypes;
+using FileArchiver.Core.Utils.File;
+
+using Lang = FileArchiver.Core.Properties.Resources;
 
 namespace FileArchiver.Core
 {
@@ -47,6 +50,8 @@ namespace FileArchiver.Core
 		                     IReadOnlyCollection<Path> pathsOnFileSystem,
 		                     FileAddingErrorHandler errorHandler)
 		{
+			CheckFilesCanBeAdded(archive, pathsOnFileSystem);
+
 			foreach(var pathOnFileSystem in pathsOnFileSystem)
 			{
 				var traverser = new FileSystemHierarchyTraverser(mFileSystem);
@@ -56,6 +61,18 @@ namespace FileArchiver.Core
 
 				traverser.Traverse(visitor, pathOnFileSystem);
 			}
+		}
+
+		private void CheckFilesCanBeAdded(IArchive archive, IReadOnlyCollection<Path> pathsOnFileSystem)
+		{
+			if(archive.SupportsMultipleFiles)
+				return;
+
+			if(archive.RootFiles.Any()     ||
+			   pathsOnFileSystem.Count > 1 || pathsOnFileSystem.Any(mFileSystem.FileInfo.IsDirectory))
+			{
+				throw new InvalidOperationException(Lang.ArchiveCannotContainMultipleFiles);
+			}			
 		}
 	}
 }

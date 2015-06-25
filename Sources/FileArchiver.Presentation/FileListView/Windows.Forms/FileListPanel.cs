@@ -29,6 +29,7 @@ using FileArchiver.Core.Utils;
 using FileArchiver.Core.ValueTypes;
 using FileArchiver.Presentation.Commands;
 using FileArchiver.Presentation.FileListView.Utils;
+using FileArchiver.Presentation.OtherViews;
 using FileArchiver.Presentation.Settings;
 using FileArchiver.Presentation.Utils;
 using FileArchiver.Presentation.Utils.Windows.Forms;
@@ -42,9 +43,10 @@ namespace FileArchiver.Presentation.FileListView.Windows.Forms
 	{
 		private readonly IFileListViewModel mViewModel;
 
-		public FileListPanel(IFileListViewModel viewModel)
+		public FileListPanel(IFileListViewModel viewModel, IDialogLauncher dialogLauncher)
 		{
 			Contract.Requires(viewModel != null);
+			Contract.Requires(dialogLauncher != null);
 
 			InitializeComponent();
 
@@ -56,6 +58,8 @@ namespace FileArchiver.Presentation.FileListView.Windows.Forms
 			ViewModel_CurrentDirectoryChanged(this, EventArgs.Empty);
 
 			WireDataBinding();
+
+			mViewModel.ErrorOccured +=	(sender, e) => dialogLauncher.DisplayError(e.ErrorMessage);
 		}
 
 		protected override void OnLoad(EventArgs e)

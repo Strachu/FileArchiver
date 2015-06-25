@@ -245,6 +245,7 @@
       <DependentUpon>FileEntryExtractingVisitor.cs</DependentUpon>
     </Compile>
     <Compile Include="Services\ArchiveExtractionService.cs" />
+    <Compile Include="Utils\File\IFileSystem.Extensions.cs" />
     <Compile Include="Utils\NonMarshallingProgress.cs" />
     <Compile Include="ValueTypes\FileNameTypeConverter.cs" />
     <Compile Include="FromFileSystemFileAdding\FromFileSystemFileAddingService.cs" />

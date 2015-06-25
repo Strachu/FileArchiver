@@ -374,6 +374,21 @@ namespace FileArchiver.Presentation.Tests.FileListView
 			FileListViewModelTestUtil.AssertOnlyFollowingFilesAreSelected(mTestedModel, "Directory2");
 		}
 
+		[Test]
+		public void WhenInvalidOperationExceptionIsThrownInAddFiles_ErrorOccuredEventIsRaised()
+		{
+			bool eventRaised = false;
+			mTestedModel.ErrorOccured += (sender, e) => eventRaised = true;
+
+			A.CallTo(() => mFileAddingService.AddFiles(null, null, null, null)).WithAnyArguments()
+			                                                                   .Throws<InvalidOperationException>();
+
+
+			mTestedModel.AddFiles(new Path[0]);
+
+			Assert.That(eventRaised);
+		}
+
 		private void AssertFileListChangedTo(params string[] fileNames)
 		{
 			FileListViewModelTestUtil.AssertFileListIsSetTo(mTestedModel, fileNames);

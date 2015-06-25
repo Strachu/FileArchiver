@@ -36,6 +36,8 @@ namespace FileArchiver.Core.Tests.FromFileSystemFileAdding
 
 			mTestedService = new FromFileSystemFileAddingService(mFileSystemMock);
 
+			A.CallTo(() => mArchiveMock.SupportsMultipleFiles).Returns(true);
+
 			mFileSystemMock.AddFile(new Path("C:/directory/subdirectory"), new MockDirectoryData()); // AddDirectory adds following slash to directory name
 			mFileSystemMock.AddFile(new Path("C:/directory/subdirectory/file1"), new MockFileData(""));
 			mFileSystemMock.AddFile(new Path("C:/directory/subdirectory/file2"), new MockFileData(""));
@@ -215,6 +217,58 @@ namespace FileArchiver.Core.Tests.FromFileSystemFileAdding
 			ArchiveTestUtil.AssertFileAdded(mArchiveMock, new Path("ParentDirectory/directory1"), isDirectory: true);
 			ArchiveTestUtil.AssertFileAdded(mArchiveMock, new Path("ParentDirectory/directory1/file1"), isDirectory: false);
 			ArchiveTestUtil.AssertFileAdded(mArchiveMock, new Path("ParentDirectory/directory1/file2"), isDirectory: false);
+		}
+
+		[Test]
+		public void WhenArchiveDoesNotSupportMultipleFiles_FileIsAdded_ArchiveAlreadyHasSomeFile_InvalidOperationExceptionIsThrown()
+		{
+			var fileAlreadyInArchive = new FileEntry.Builder().WithName(new FileName("file")).Build();
+
+			A.CallTo(() => mArchiveMock.SupportsMultipleFiles).Returns(false);
+			A.CallTo(() => mArchiveMock.RootFiles).Returns(fileAlreadyInArchive.ToSingleElementList());
+
+			var filesToAdd = new Path[]
+			{
+				new Path("C:/directory/subdirectory/file1")
+			};
+
+			Assert.Throws<InvalidOperationException>(() =>
+			{
+				mTestedService.AddFiles(mArchiveMock, Path.Root, filesToAdd, mExceptionHandlerMock);
+			});
+		}
+
+		[Test]
+		public void WhenArchiveDoesNotSupportMultipleFiles_DirectoryIsAdded_InvalidOperationExceptionIsThrown()
+		{
+			A.CallTo(() => mArchiveMock.SupportsMultipleFiles).Returns(false);
+
+			var filesToAdd = new Path[]
+			{
+				new Path("C:/directory/subdirectory")
+			};
+
+			Assert.Throws<InvalidOperationException>(() =>
+			{
+				mTestedService.AddFiles(mArchiveMock, Path.Root, filesToAdd, mExceptionHandlerMock);
+			});
+		}
+
+		[Test]
+		public void WhenArchiveDoesNotSupportMultipleFiles_MultipleFilesAreAdded_InvalidOperationExceptionIsThrown()
+		{
+			A.CallTo(() => mArchiveMock.SupportsMultipleFiles).Returns(false);
+
+			var filesToAdd = new Path[]
+			{
+				new Path("C:/directory/subdirectory/file1"),
+				new Path("C:/directory/subdirectory/file2")
+			};
+
+			Assert.Throws<InvalidOperationException>(() =>
+			{
+				mTestedService.AddFiles(mArchiveMock, Path.Root, filesToAdd, mExceptionHandlerMock);
+			});
 		}
 	}
 }
