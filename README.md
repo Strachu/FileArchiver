@@ -28,6 +28,14 @@ To run the application you need:
 Additionally, if you want to compile the application you need:
 - Microsoft Visual Studio 2013 or later
 
+# Download
+The binary releases and their corresponding source code snapshots can be downloaded at the  [releases](https://github.com/Strachu/FileArchiver/releases) page.
+
+If you would like to retrieve the most up to date source code and compile the application yourself, install git
+and clone the repository by executing the command:
+`git clone https://github.com/Strachu/FileArchiver.git` or alternatively, click the "Download ZIP" button at the side
+panel of this page.
+
 # Libraries
 The application uses the following libraries:
 - Windows Forms for the creation of graphical user interface
