@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="Commands\SaveArchiveCommandTest.cs" />
     <Compile Include="FileListView\FileListPresenterTest.cs" />
+    <Compile Include="FileListView\FileListViewModelSelectionAndDisplayPositionTest.cs" />
     <Compile Include="FileListView\FileListViewModelNavigationTest.cs" />
     <Compile Include="FileListView\FileListViewModelFileAddingAndRemovingTest.cs" />
     <Compile Include="FileListView\FileListViewModelTestBase.cs" />
