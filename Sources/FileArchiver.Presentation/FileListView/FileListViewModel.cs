@@ -205,6 +205,7 @@ namespace FileArchiver.Presentation.FileListView
 			mUIThread.Send(() =>
 			{
 				UpdateAddFilesEnabled();
+				UpdateFileEntryIfItsFileChanged(e.AddedFile.Path);
 
 				if(e.AddedFile.Path.IsAncestorOf(CurrentDirectory) || e.AddedFile.Path.Equals(CurrentDirectory))
 				{
@@ -238,6 +239,7 @@ namespace FileArchiver.Presentation.FileListView
 			mUIThread.Send(() =>
 			{
 				UpdateAddFilesEnabled();
+				UpdateFileEntryIfItsFileChanged(e.RemovedFile.Path);
 			
 				if(!e.RemovedFile.Path.ParentDirectory.Equals(CurrentDirectory))
 					return;
@@ -269,6 +271,27 @@ namespace FileArchiver.Presentation.FileListView
 		private void UpdateAddFilesEnabled()
 		{
 			AddFilesEnabled = Archive.SupportsMultipleFiles || !Archive.RootFiles.Any();
+		}
+
+		/// <summary>
+		/// Updates the file entry view model if some of its file was added, removed or changed.
+		/// </summary>
+		/// <param name="changedFilePath">
+		/// The path of changed file.
+		/// </param>
+		private void UpdateFileEntryIfItsFileChanged(Path changedFilePath)
+		{
+			for(int entryIndex = 0; entryIndex < FilesInCurrentDirectory.Count; ++entryIndex)
+			{
+				var entryPath = CurrentDirectory.Combine(FilesInCurrentDirectory[entryIndex].Name);
+				if(!entryPath.IsAncestorOf(changedFilePath))
+					continue;
+
+				var upToDateFile = Archive.GetFile(entryPath);
+
+				FilesInCurrentDirectory[entryIndex] = new FileEntryViewModel(upToDateFile, mFileIconProvider);
+				return;
+			}
 		}
 
 		protected override void OnPropertyChanged(string propertyName)

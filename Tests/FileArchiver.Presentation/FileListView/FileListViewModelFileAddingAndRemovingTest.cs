@@ -150,6 +150,38 @@ namespace FileArchiver.Presentation.Tests.FileListView
 		}
 
 		[Test]
+		public void WhenFileIsAddedToSubDirectory_SubDirectoryEntryIsUpdated()
+		{
+			mTestedModel.SetArchive(mArchiveMock, new Path("C:\\archive.zip"));
+			mTestedModel.Open(new FileName("Directory2"));
+
+			mArchiveMock.AddFile(new Path("Directory2/Directory1InDirectory2"), CreateFile("SomeFile"));
+
+			var changedDirectoryViewModel = mTestedModel.FilesInCurrentDirectory.Single(x =>
+			{
+				return x.Name.Equals(new FileName("Directory1InDirectory2"));
+			});
+
+			Assert.That(changedDirectoryViewModel.FileCount, Is.EqualTo(3), "The directory was not updated");
+		}
+
+		[Test]
+		public void WhenFileIsRemovedFromSubDirectory_SubDirectoryEntryIsUpdated()
+		{
+			mTestedModel.SetArchive(mArchiveMock, new Path("C:\\archive.zip"));
+			mTestedModel.Open(new FileName("Directory2"));
+
+			mArchiveMock.RemoveFile(new Path("Directory2/Directory1InDirectory2/File1InNestedDirectory"));
+
+			var changedDirectoryViewModel = mTestedModel.FilesInCurrentDirectory.Single(x =>
+			{
+				return x.Name.Equals(new FileName("Directory1InDirectory2"));
+			});
+
+			Assert.That(changedDirectoryViewModel.FileCount, Is.EqualTo(1), "The directory was not updated");
+		}
+
+		[Test]
 		public void WhenFileIsAddedToArchive_TheViewShouldScrollToIt()
 		{			
 			mTestedModel.SetArchive(mArchiveMock, new Path("C:\\archive.zip"));
