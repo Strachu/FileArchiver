@@ -22,9 +22,11 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
-using FileArchiver.Core.Archive;
+
 using FileArchiver.Core.Loaders;
+
 using Liferay.Nativity.Modules.ContextMenu.Model;
 
 using Lang = FileArchiver.ContextMenu.Properties.Resources;
@@ -36,8 +38,6 @@ namespace FileArchiver.ContextMenu
 	/// </summary>
 	internal class ContextMenuHandler
 	{
-		private const string MAIN_ASSEMBLY_NAME = "FileArchiver.exe";
-
 		private readonly IArchiveLoadingService mLoadingService;
 
 		public ContextMenuHandler(IArchiveLoadingService loadingService)
@@ -100,14 +100,14 @@ namespace FileArchiver.ContextMenu
 		{
 			var arguments = String.Format("--extract {0}", ConvertFileListToArgumentString(selectedArchives));
 
-			Process.Start(MAIN_ASSEMBLY_NAME, arguments);
+			StartFileArchiver(arguments);
 		}
 
 		private void PackSelected(ContextMenuItem sender, IEnumerable<string> paths)
 		{
 			var arguments = String.Format("--pack {0}", ConvertFileListToArgumentString(paths));
 
-			Process.Start(MAIN_ASSEMBLY_NAME, arguments);
+			StartFileArchiver(arguments);
 		}
 
 		private static string ConvertFileListToArgumentString(IEnumerable<string> files)
@@ -124,6 +124,14 @@ namespace FileArchiver.ContextMenu
 			builder.Remove(builder.Length - 1, 1);
 
 			return builder.ToString();
+		}
+
+		private void StartFileArchiver(string arguments)
+		{
+			var applicationDirectory   = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+			var fileArchiverBinaryPath = Path.Combine(applicationDirectory, "FileArchiver.exe");
+		
+			Process.Start(fileArchiverBinaryPath, arguments);
 		}
 	}
 }
