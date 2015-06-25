@@ -41,6 +41,8 @@ namespace FileArchiver.Presentation.Utils.Windows.Forms
 
 			base.OnShown(e);
 
+			base.Activate();
+
 			mOpenForms.Add(this);
 		}
 
