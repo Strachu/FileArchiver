@@ -36,6 +36,16 @@ namespace FileArchiver.Presentation.Tests.FileListView
 		}
 
 		[Test]
+		public void AfterSettingTheArchive_WhenArchiveSupportsOnlySingleFileAndItAlreadyContainsSomeFile_FileAddingIsDisabled()
+		{
+			A.CallTo(() => mArchiveMock.SupportsMultipleFiles).Returns(false);
+
+			mTestedModel.SetArchive(mArchiveMock, new Path("C:\\archive.zip"));
+
+			Assert.That(mTestedModel.AddFilesEnabled, Is.False);
+		}
+
+		[Test]
 		public void WhenFileIsAddedToCurrentDirectory_FilesInCurrentDirectoryReflectsTheChange()
 		{			
 			mTestedModel.SetArchive(mArchiveMock, new Path("C:\\archive.zip"));
@@ -387,6 +397,37 @@ namespace FileArchiver.Presentation.Tests.FileListView
 			mTestedModel.AddFiles(new Path[0]);
 
 			Assert.That(eventRaised);
+		}
+
+		[Test]
+		public void WhenArchiveDoesNotSupportMultipleFiles_FileIsAdded_FileAddingBecomesDisabled()
+		{
+			var emptyArchive = A.Fake<ArchiveBase>();
+			A.CallTo(emptyArchive).CallsBaseMethod();
+			A.CallTo(() => emptyArchive.SupportsMultipleFiles).Returns(false);
+
+			mTestedModel.SetArchive(emptyArchive, new Path("C:\\archive.zip"));
+
+			emptyArchive.AddFile(Path.Root, CreateFile("NewFile"));
+
+			Assert.That(mTestedModel.AddFilesEnabled, Is.False);
+			mPropertyChangedTester.AssertPropertyChangedRaisedFor(() => mTestedModel.AddFilesEnabled);
+		}
+
+		[Test]
+		public void WhenArchiveDoesNotSupportMultipleFiles_FileIsRemoved_FileAddingBecomesEnabledAgain()
+		{
+			var emptyArchive = A.Fake<ArchiveBase>();
+			A.CallTo(emptyArchive).CallsBaseMethod();
+			A.CallTo(() => emptyArchive.SupportsMultipleFiles).Returns(false);
+
+			mTestedModel.SetArchive(emptyArchive, new Path("C:\\archive.zip"));
+			emptyArchive.AddFile(Path.Root, CreateFile("NewFile"));
+
+			emptyArchive.RemoveFile(new Path("NewFile"));
+
+			Assert.That(mTestedModel.AddFilesEnabled, Is.True);
+			mPropertyChangedTester.AssertPropertyChangedRaisedFor(() => mTestedModel.AddFilesEnabled);
 		}
 
 		private void AssertFileListChangedTo(params string[] fileNames)

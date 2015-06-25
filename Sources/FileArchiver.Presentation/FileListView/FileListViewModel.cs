@@ -119,7 +119,7 @@ namespace FileArchiver.Presentation.FileListView
 			Archive     = archive;
 			ArchivePath = archivePath;
 
-			AddFilesEnabled = true;
+			UpdateAddFilesEnabled();
 
 			ChangeDirectory(Path.Root);
 
@@ -204,6 +204,8 @@ namespace FileArchiver.Presentation.FileListView
 		{
 			mUIThread.Send(() =>
 			{
+				UpdateAddFilesEnabled();
+
 				if(e.AddedFile.Path.IsAncestorOf(CurrentDirectory) || e.AddedFile.Path.Equals(CurrentDirectory))
 				{
 					ReloadFileList();
@@ -233,11 +235,13 @@ namespace FileArchiver.Presentation.FileListView
 
 		private void Archive_FileRemoved(object sender, FileRemovedEventArgs e)
 		{
-			if(!e.RemovedFile.Path.ParentDirectory.Equals(CurrentDirectory))
-				return;
-
 			mUIThread.Send(() =>
 			{
+				UpdateAddFilesEnabled();
+			
+				if(!e.RemovedFile.Path.ParentDirectory.Equals(CurrentDirectory))
+					return;
+
 				// RemoveAt() causes the view to scroll to the removed file overwriting the current FirstDisplayedFileIndex.
 				var oldFirstDisplayedFileIndex = FirstDisplayedFileIndex;
 				var removedFileIndex = FilesInCurrentDirectory.FirstIndex(file => file.Name.Equals(e.RemovedFile.Name));
@@ -260,6 +264,11 @@ namespace FileArchiver.Presentation.FileListView
 					FirstDisplayedFileIndex = oldFirstDisplayedFileIndex;
 				}
 			});
+		}
+
+		private void UpdateAddFilesEnabled()
+		{
+			AddFilesEnabled = Archive.SupportsMultipleFiles || !Archive.RootFiles.Any();
 		}
 
 		protected override void OnPropertyChanged(string propertyName)

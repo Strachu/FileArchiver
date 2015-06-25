@@ -46,7 +46,7 @@ namespace FileArchiver.Presentation.Commands
 
 			Enabled            = false;
 
-			mFileListViewModel.SubscribeToPropertyChanged(() => mFileListViewModel.Archive, ArchiveChanged);
+			mFileListViewModel.SubscribeToPropertyChanged(() => mFileListViewModel.AddFilesEnabled, AddFilesEnabledChanged);
 		}
 
 		public override Task ExecuteAsync()
@@ -60,9 +60,9 @@ namespace FileArchiver.Presentation.Commands
 			return Task.FromResult(0);
 		}
 
-		private void ArchiveChanged(object sender, EventArgs e)
+		private void AddFilesEnabledChanged(object sender, EventArgs e)
 		{
-			Enabled = true;
+			Enabled = mFileListViewModel.AddFilesEnabled;
 		}
 	}
 }
