@@ -34,17 +34,17 @@ namespace FileArchiver.Core.Archive
 	{
 		public class Builder
 		{
-			private Guid            mId;
-			private FileEntry       mParent;
-			private FileName        mName;
-			private long            mSize;
-			private DateTime?       mLastModificationTime;
-			private bool            mIsDirectory;
-			private Path            mDataFilePath;
-			private FileState       mFileState;
-			private List<FileEntry> mFiles;
-			private List<FileEntry> mRemovedFiles;
-			private object          mArchiveData;
+			private          Guid            mId;
+			private readonly FileEntry       mParent;
+			private          FileName        mName;
+			private          long            mSize;
+			private          DateTime?       mLastModificationTime;
+			private          bool            mIsDirectory;
+			private          Path            mDataFilePath;
+			private          FileState       mFileState;
+			private          List<FileEntry> mFiles;
+			private readonly List<FileEntry> mRemovedFiles;
+			private          object          mArchiveData;
 
 			public Builder()
 			{
@@ -118,6 +118,7 @@ namespace FileArchiver.Core.Archive
 			public Builder WithDataFromFile(FileInfoBase fileInfo)
 			{
 				Contract.Requires(fileInfo != null);
+				Contract.Requires(!fileInfo.Attributes.HasFlag(FileAttributes.Directory));
 
 				mDataFilePath = new Path(fileInfo.FullName);
 
@@ -143,6 +144,9 @@ namespace FileArchiver.Core.Archive
 
 			public Builder WithFiles(params FileEntry[] files)
 			{
+				Contract.Requires(files != null);
+				Contract.Requires(Contract.ForAll(files, file => file != null));
+
 				mFiles = files.ToList();
 				return this;
 			}

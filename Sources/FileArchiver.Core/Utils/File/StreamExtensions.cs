@@ -59,6 +59,7 @@ namespace FileArchiver.Core.Utils.File
 		{
 			Contract.Requires(sourceStream != null);
 			Contract.Requires(destinationPath != null);
+			Contract.Requires(destinationPath.ParentDirectory != null);
 
 			Directory.CreateDirectory(destinationPath.ParentDirectory);
 

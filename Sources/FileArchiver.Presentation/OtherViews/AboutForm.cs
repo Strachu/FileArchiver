@@ -60,6 +60,9 @@ namespace FileArchiver.Presentation.OtherViews
 				creditsText  = creditsText.Remove(link.Start, urlEnd + 2 - link.Start);
 
 				var linkEnd = creditsText.IndexOf("</a>", link.Start, StringComparison.InvariantCultureIgnoreCase);
+				if(linkEnd == -1)
+					continue;
+
 				link.Length = linkEnd - link.Start;	
 
 				creditsText = creditsText.Remove(linkEnd, 4);

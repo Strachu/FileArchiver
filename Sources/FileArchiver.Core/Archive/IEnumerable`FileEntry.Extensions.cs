@@ -18,6 +18,7 @@
 #endregion
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +32,8 @@ namespace FileArchiver.Core.Archive
 		/// </summary>
 		public static IEnumerable<FileEntry> Flatten(this IEnumerable<FileEntry> files)
 		{
+			Contract.Requires(files != null);
+
 			var fileList = files.ToList();
 
 			return fileList.Concat(fileList.SelectMany(file => file.EnumerateAllFilesRecursively()));

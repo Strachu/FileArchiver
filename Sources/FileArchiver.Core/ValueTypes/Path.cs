@@ -63,6 +63,7 @@ namespace FileArchiver.Core.ValueTypes
 		public Path ChangeFileName(FileName newName)
 		{
 			Contract.Requires(newName != null);
+			Contract.Requires(!this.Equals(Root));
 
 			return ParentDirectory.Combine(newName);
 		}
@@ -167,6 +168,8 @@ namespace FileArchiver.Core.ValueTypes
 
 		public Path RemoveExtension()
 		{
+			Contract.Requires(FileName != null);
+
 			var fileNameWithoutExtension = new Path(System.IO.Path.GetFileNameWithoutExtension(mPath));
 
 			return ParentDirectory.Combine(fileNameWithoutExtension);
@@ -205,7 +208,7 @@ namespace FileArchiver.Core.ValueTypes
 
 		public static implicit operator string(Path path)
 		{
-			return path.mPath;
+			return path != null ? path.mPath : null;
 		}
 
 		public override string ToString()

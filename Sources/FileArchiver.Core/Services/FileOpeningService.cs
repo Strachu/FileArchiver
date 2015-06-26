@@ -71,8 +71,14 @@ namespace FileArchiver.Core.Services
 		/// If the has been modified in the external application, the update will be automatically
 		/// reflected in the archive.
 		/// </remarks>
-		public async Task OpenFilesAsync(IArchive archive, IEnumerable<Path> filePaths, CancellationToken cancelToken, IProgress<double?> progress)
+		public async Task OpenFilesAsync(IArchive archive,
+		                                 IEnumerable<Path> filePaths,
+		                                 CancellationToken cancelToken,
+		                                 IProgress<double?> progress)
 		{
+			Contract.Requires(archive != null);
+			Contract.Requires(filePaths != null);
+
 			var files          = filePaths.Select(archive.GetFile).ToList();
 			var filesNotInTemp = files.Where(file => !File.Exists(mTempFileProvider.GetTempFileFor(file))).ToList();
 
@@ -90,7 +96,10 @@ namespace FileArchiver.Core.Services
 			}
 		}
 
-		private Task ExtractFilesToTempAsync(IArchive archive, IEnumerable<FileEntry> files, CancellationToken cancelToken, IProgress<double?> progress)
+		private Task ExtractFilesToTempAsync(IArchive archive,
+		                                     IEnumerable<FileEntry> files,
+		                                     CancellationToken cancelToken,
+		                                     IProgress<double?> progress)
 		{
 			var sourceDestinationPairs = files.Select(file => new SourceDestinationPathPair
 			(

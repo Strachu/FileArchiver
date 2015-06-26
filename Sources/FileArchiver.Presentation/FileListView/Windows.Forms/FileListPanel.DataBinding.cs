@@ -46,9 +46,6 @@ namespace FileArchiver.Presentation.FileListView.Windows.Forms
 
 		private void ViewModel_CurrentDirectoryChanged(object sender, EventArgs e)
 		{
-			if(mViewModel.CurrentDirectoryFullAddress == null)
-				return;
-
 			mAddressBar.Text = mViewModel.CurrentDirectoryFullAddress;
 			mAddressBar.ScrollToEnd();
 

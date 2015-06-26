@@ -92,7 +92,7 @@ namespace FileArchiver.Core.Archive
 		private IEnumerable<Path> GetPathHierarchy(Path path)
 		{
 			var parentDirectoriesPaths = new List<Path>();
-			while(!path.Equals(Path.Root))
+			while(path.ParentDirectory != null)
 			{
 				parentDirectoriesPaths.Add(path);
 

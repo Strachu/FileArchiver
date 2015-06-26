@@ -99,6 +99,8 @@ namespace FileArchiver.Core.Archive
 		{
 			get
 			{
+				Contract.Ensures(Contract.Result<Path>() != null);
+
 				if(Parent == null)
 					return Name;
 

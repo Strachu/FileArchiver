@@ -18,6 +18,7 @@
 #endregion
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.IO;
 using System.IO.Abstractions;
 using System.Linq;
@@ -32,6 +33,9 @@ namespace FileArchiver.Core.Utils.File
 	{
 		public static bool IsDirectory(this IFileInfoFactory fileInfo, Path path)
 		{
+			Contract.Requires(fileInfo != null);
+			Contract.Requires(path != null);
+
 			return fileInfo.FromFileName(path).Attributes.HasFlag(FileAttributes.Directory);
 		}
 	}

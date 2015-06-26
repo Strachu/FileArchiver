@@ -46,6 +46,7 @@ namespace FileArchiver.Presentation.ArchiveSettings.Framework
 		                                           IReadOnlyCollection<ISettingsControl> controls,
 		                                           Expression<Func<bool>> visibleProperty = null)
 		{
+			Contract.Requires(factory != null);
 			Contract.Requires(controls != null);
 			Contract.Requires(Contract.ForAll(controls, control => control != null));
 
@@ -63,6 +64,7 @@ namespace FileArchiver.Presentation.ArchiveSettings.Framework
 		                                                     Expression<Func<bool>> visibleProperty = null)
 			where TEnum : struct
 		{
+			Contract.Requires(factory != null);
 			Contract.Requires(typeof(TEnum).IsEnum);
 
 			var allPossibleEnumValues = Enum.GetValues(typeof(TEnum)).Cast<TEnum>().ToList();

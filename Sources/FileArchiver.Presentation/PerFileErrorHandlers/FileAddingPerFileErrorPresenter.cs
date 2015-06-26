@@ -44,6 +44,7 @@ namespace FileArchiver.Presentation.PerFileErrorHandlers
 		                                       SynchronizationContext uiThreadContext)
 			: base(view, fileNameGenerator, uiThreadContext)
 		{
+			Contract.Requires(view != null);
 			Contract.Requires(archive != null);
 
 			mView    = view;

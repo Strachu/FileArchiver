@@ -96,12 +96,12 @@ namespace FileArchiver.Core.ValueTypes
 
 		public static implicit operator string(FileName name)
 		{
-			return name.mName;
+			return name != null ? name.mName : null;
 		}
 
 		public static implicit operator Path(FileName name)
 		{
-			return new Path(name.mName);
+			return name != null ? new Path(name.mName) : null;
 		}
 
 		public override string ToString()
