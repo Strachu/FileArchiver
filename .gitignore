@@ -3,6 +3,7 @@
 /Documentation/Output
 /packages
 /Installers/FileArchiver Setup.exe
+/Installers/LICENSE.txt
 /Sources/FileArchiver.Archive.GZip/obj
 /Sources/FileArchiver.Archive.SevenZip/obj
 /Sources/FileArchiver.Archive.Tar/obj

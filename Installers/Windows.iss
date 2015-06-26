@@ -19,6 +19,7 @@ OutputBaseFilename=FileArchiver Setup
 ArchitecturesInstallIn64BitMode=x64 ia64
 DefaultDirName={pf}\FileArchiver
 DefaultGroupName=FileArchiver
+LicenseFile=Installers\LICENSE.txt
 AllowNoIcons=yes
 Compression=lzma/ultra
 SolidCompression=yes
@@ -44,6 +45,9 @@ Source: "Binaries\Release\log4net.dll"; DestDir: "{app}"; Flags: ignoreversion r
 Source: "Binaries\Release\Newtonsoft.Json.dll"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete; Components: ContextMenuIntegration
 
 Source: "Binaries\Release\Plugins\*"; Excludes: "*.pdb,FileArchiver.Core.*,FileArchiver.exe,FileArchiver.pdb"; DestDir: "{app}\Plugins"; Flags: ignoreversion restartreplace uninsrestartdelete recursesubdirs
+
+Source: "LICENSE.txt"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete
+Source: "LICENSE_THIRD_PARTY.txt"; DestDir: "{app}"; Flags: ignoreversion restartreplace uninsrestartdelete
 
 [Components]
 Name: "ContextMenuIntegration"; Description: "{cm:ContextMenuIntegrationComponent}"; Types: full custom compact
@@ -79,3 +83,6 @@ Root: "HKCR"; Subkey: ".tar"; ValueType: string; ValueData: "FileArchiver"; Flag
 Root: "HKCR"; Subkey: ".gz"; ValueType: string; ValueData: "FileArchiver"; Flags: uninsdeletevalue; Tasks: FileAssocations
 Root: "HKCR"; Subkey: "FileArchiver"; ValueType: string; ValueData: "FileArchiver"; Flags: uninsdeletekey; Tasks: FileAssocations
 Root: "HKCR"; Subkey: "FileArchiver\Shell\Open\Command"; ValueType: string; ValueData: """{app}\FileArchiver.exe"" ""%1"""; Flags: uninsdeletekey; Tasks: FileAssocations
+
+[PreCompile]
+Name: "Concatenate licenses.bat"; Flags: abortonerror

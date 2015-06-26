@@ -1,0 +1,1 @@
+copy ..\LICENSE.txt+..\LICENSE_THIRD_PARTY.txt LICENSE.txt
