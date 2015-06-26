@@ -24,6 +24,7 @@ using FileArchiver.Core.ValueTypes;
 
 namespace FileArchiver.Core
 {
+	[Serializable]
 	public class FileExistsException : ArgumentException
 	{
 		public FileExistsException(Path filePath, Exception innerException = null) : base("File " + filePath + " already exists.", innerException)

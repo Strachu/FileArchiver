@@ -244,6 +244,7 @@
     <Compile Include="DirectoryTraversing\FileEntryExtractingVisitor.Contracts.cs">
       <DependentUpon>FileEntryExtractingVisitor.cs</DependentUpon>
     </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Services\ArchiveExtractionService.cs" />
     <Compile Include="Utils\File\IFileSystem.Extensions.cs" />
     <Compile Include="Utils\NonMarshallingProgress.cs" />

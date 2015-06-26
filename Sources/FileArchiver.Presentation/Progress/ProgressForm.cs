@@ -33,10 +33,10 @@ namespace FileArchiver.Presentation.Progress
 	/// </summary>
 	internal partial class ProgressForm : FormBase, IProgressView
 	{
-		private readonly CancellationTokenSource mCancelTokenSource;
+		private CancellationTokenSource mCancelTokenSource;
 
-		private readonly string                  mOperationTitle;
-		private bool                             mClosingProgrammatically;
+		private readonly string         mOperationTitle;
+		private bool                    mClosingProgrammatically;
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="ProgressForm"/> class.
@@ -131,6 +131,25 @@ namespace FileArchiver.Presentation.Progress
 
 			mLabel.Text           = Lang.Cancelling;
 			mCancelButton.Enabled = false;
+		}
+
+		protected override void Dispose(bool disposeManagedResources)
+		{
+			if(disposeManagedResources)
+			{
+				if(components != null)
+				{
+					components.Dispose();
+					components = null;
+				}
+
+				if(mCancelTokenSource != null)
+				{
+					mCancelTokenSource.Dispose();
+					mCancelTokenSource = null;
+				}
+			}
+			base.Dispose(disposeManagedResources);
 		}
 	}
 }

@@ -17,6 +17,7 @@
 */
 #endregion
 
+using System;
 using System.IO;
 
 namespace FileArchiver.Core.Loaders
@@ -24,6 +25,7 @@ namespace FileArchiver.Core.Loaders
 	/// <summary>
 	/// Exception thrown when trying to load an archive in unsupported format.
 	/// </summary>
+	[Serializable]
 	public class NotSupportedFormatException : IOException
 	{
 		public NotSupportedFormatException(string fileName) : base("The format of " + fileName + " is not supported.")

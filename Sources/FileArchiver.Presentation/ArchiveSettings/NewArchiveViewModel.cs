@@ -35,7 +35,7 @@ namespace FileArchiver.Presentation.ArchiveSettings
 	/// <summary>
 	/// A view model for a view allowing a user to choose new archive format and its format specific settings.
 	/// </summary>
-	internal class NewArchiveViewModel : NotifyPropertyChangedHelper
+	internal sealed class NewArchiveViewModel : NotifyPropertyChangedHelper
 	{
 		private readonly Dictionary<string, List<IArchiveSettingsViewModel>> mArchiveSettingsViewModels = new Dictionary<string, List<IArchiveSettingsViewModel>>();
 

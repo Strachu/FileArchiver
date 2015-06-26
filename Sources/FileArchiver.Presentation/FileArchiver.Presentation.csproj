@@ -231,6 +231,7 @@
   <ItemGroup>
     <Compile Include="ArchiveSettings\Framework\Windows.Forms\Controls\CheckBox.cs" />
     <Compile Include="FileListView\EventArgs\ErrorEventArgs.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Utils\Windows.Forms\FormBase.cs">
       <SubType>Form</SubType>
     </Compile>

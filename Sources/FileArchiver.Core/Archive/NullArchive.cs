@@ -29,7 +29,7 @@ namespace FileArchiver.Core.Archive
 	/// <summary>
 	/// Null Object Pattern
 	/// </summary>
-	public class NullArchive : IArchive
+	public sealed class NullArchive : IArchive
 	{
 		public bool SupportsMultipleFiles
 		{

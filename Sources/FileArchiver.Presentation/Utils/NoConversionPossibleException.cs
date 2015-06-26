@@ -26,6 +26,7 @@ using System.Threading.Tasks;
 
 namespace FileArchiver.Presentation.Utils
 {
+	[Serializable]
 	public class NoConversionPossibleException : Exception
 	{
 		public NoConversionPossibleException(string message, Exception innerException = null)
